@@ -1,0 +1,149 @@
+---
+import Base from "../layouts/Base.astro";
+import records from "../data/publications.json";
+const topics: Record<string, string> = {
+  hybrid: "Hybrid manufacturing",
+  additive: "Additive manufacturing / DED",
+  machining: "Machining",
+  machines: "Machine tools & spindles",
+  control: "Measurement & control",
+  modeling: "Modeling & simulation",
+  planning: "Process & toolpath planning",
+  surfaces: "Surface engineering",
+  medical: "Biomedical manufacturing",
+  forming: "Sheet metal forming",
+};
+const years = [...new Set(records.map((r) => r.year))];
+---
+
+<Base
+  title="Publications"
+  description="Browse 44 ARMS Laboratory publications by year, search term, and research topic."
+  current="/publications/"
+>
+  <section class="section publications">
+    <p class="eyebrow">Research outputs</p>
+    <h1>Publications</h1>
+    <p class="lead">
+      Research in manufacturing processes, machine tools, and experimental
+      methods.
+    </p>
+    <div class="pub-controls">
+      <label for="pub-search">
+        Search publications
+        <input
+          id="pub-search"
+          type="search"
+          placeholder="Title, author, year, or keyword"
+          autocomplete="off"
+        />
+      </label>
+      <label for="pub-topic">
+        Research topic
+        <select id="pub-topic">
+          <option value="all">All topics</option>
+          {Object.entries(topics).map(([key, value]) => (
+            <option value={key}>{value}</option>
+          ))}
+        </select>
+      </label>
+    </div>
+    <p id="pub-count" class="note" role="status" aria-live="polite">
+      Showing all {records.length} publications
+    </p>
+    <div id="pub-list">
+      {years.map((year) => (
+        <section class="pub-year" data-year={year}>
+          <h2>{year}</h2>
+          <div class="pub-year-entries">
+            {records
+              .filter((r) => r.year === year)
+              .map((r) => (
+                <article
+                  class="pub-entry"
+                  data-topics={r.topics.join(",")}
+                  data-search={`${r.title} ${r.authors} ${r.year} ${r.venue} ${r.topics.map((t) => topics[t]).join(" ")}`.toLowerCase()}
+                >
+                  <p class="eyebrow">
+                    {r.topics.map((t) => topics[t]).join(" · ")}
+                  </p>
+                  <h3>{r.url ? <a href={r.url}>{r.title}</a> : r.title}</h3>
+                  <p>{r.authors}</p>
+                  <p class="pub-venue">
+                    {r.year} · {r.venue}
+                  </p>
+                  {r.url && <a href={r.url}>View article ↗</a>}
+                  {r.predates_lab && (
+                    <p class="note">
+                      Published before ARMS was established in 2013
+                    </p>
+                  )}
+                </article>
+              ))}
+          </div>
+        </section>
+      ))}
+    </div>
+    <p id="pub-empty" hidden>
+      No publications match your search. Try another keyword or topic.
+    </p>
+    <button
+      id="pub-expand"
+      class="button secondary"
+      type="button"
+      aria-expanded="false"
+      aria-controls="pub-list"
+      hidden
+    >
+      View all 44 publications
+    </button>
+  </section>
+</Base>
+<script>
+  const search = document.querySelector<HTMLInputElement>("#pub-search")!;
+  const topic = document.querySelector<HTMLSelectElement>("#pub-topic")!;
+  const entries = [...document.querySelectorAll<HTMLElement>(".pub-entry")];
+  const years = [...document.querySelectorAll<HTMLElement>(".pub-year")];
+  const count = document.querySelector<HTMLElement>("#pub-count")!;
+  const empty = document.querySelector<HTMLElement>("#pub-empty")!;
+  const expand = document.querySelector<HTMLButtonElement>("#pub-expand")!;
+  let expanded = false;
+  expand.hidden = false;
+  function render() {
+    const q = search.value.trim().toLocaleLowerCase();
+    const t = topic.value;
+    const matches = entries.filter(
+      (entry) =>
+        entry.dataset.search?.includes(q) &&
+        (t === "all" || entry.dataset.topics?.split(",").includes(t)),
+    );
+    const visible = expanded ? matches : matches.slice(0, 5);
+    entries.forEach((entry) => {
+      entry.hidden = !visible.includes(entry);
+    });
+    years.forEach((year) => {
+      year.hidden = !year.querySelector(".pub-entry:not([hidden])");
+    });
+    count.textContent = `Showing ${visible.length} of ${matches.length} matching publications`;
+    empty.hidden = matches.length !== 0;
+    expand.hidden = matches.length <= 5;
+    expand.textContent = expanded
+      ? "Show first five"
+      : `View all ${matches.length} matching publications`;
+    expand.setAttribute("aria-expanded", String(expanded));
+  }
+  search.addEventListener("input", () => {
+    expanded = false;
+    render();
+  });
+  topic.addEventListener("change", () => {
+    expanded = false;
+    render();
+  });
+  expand.addEventListener("click", () => {
+    expanded = !expanded;
+    render();
+    if (!expanded) count.scrollIntoView({ block: "nearest" });
+  });
+  render();
+</script>

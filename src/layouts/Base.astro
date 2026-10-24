@@ -1,0 +1,130 @@
+---
+import "../styles/global.css";
+import "../styles/refined.css";
+const { title, description, current = "" } = Astro.props;
+const nav = [
+  ["/research/", "Research"],
+  ["/members/", "People"],
+  ["/about/", "About"],
+  ["/publications/", "Publications"],
+  ["/visit/", "Contact & Visit"],
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f8f4" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <title>{title} | ARMS Laboratory, UC Davis</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <div class="affiliation">
+      <span>University of California, Davis</span>
+      <span>Mechanical and Aerospace Engineering</span>
+    </div>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="ARMS Laboratory home">
+        <img
+          src="/images/arms-logo.svg"
+          alt="ARMS Laboratory"
+          width="1500"
+          height="806"
+        />
+      </a>
+      <button
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="main-nav"
+        hidden
+      >
+        Menu <span aria-hidden="true">+</span>
+      </button>
+      <nav id="main-nav" aria-label="Main navigation">
+        {nav.map(([href, label]) => (
+          <a
+            href={href}
+            aria-current={
+              current === href ||
+              (href === "/research/" && current.startsWith("/research/"))
+                ? "page"
+                : undefined
+            }
+          >
+            {label}
+          </a>
+        ))}
+        <a
+          class="nav-join"
+          href="/open-positions/"
+          aria-current={current === "/open-positions/" ? "page" : undefined}
+        >
+          Join ARMS <span aria-hidden="true">↗</span>
+        </a>
+      </nav>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="footer-identity">
+        <strong>ARMS Laboratory</strong>
+        <p>Advanced Research for Manufacturing Systems</p>
+        <p>
+          University of California, Davis
+          <br />
+          Department of Mechanical and Aerospace Engineering
+        </p>
+      </div>
+      <div>
+        <p class="footer-label">Explore</p>
+        <a href="/research/">Research</a>
+        <a href="/members/">People</a>
+        <a href="/about/">About ARMS</a>
+        <a href="/publications/">Publications</a>
+      </div>
+      <div>
+        <p class="footer-label">Connect</p>
+        <a href="/open-positions/">Student research</a>
+        <a href="/visit/">Contact &amp; Visit</a>
+        <a href="mailto:msoshi@ucdavis.edu">msoshi@ucdavis.edu</a>
+        <a href="https://www.ucdavis.edu/">UC Davis ↗</a>
+      </div>
+    </footer>
+    <script>
+      const header = document.querySelector<HTMLElement>(".site-header");
+      const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+      if (header && toggle) {
+        toggle.hidden = false;
+        header.dataset.menuOpen = "false";
+        const close = () => {
+          header.dataset.menuOpen = "false";
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.querySelector("span")!.textContent = "+";
+        };
+        toggle.addEventListener("click", () => {
+          const open = header.dataset.menuOpen !== "true";
+          header.dataset.menuOpen = String(open);
+          toggle.setAttribute("aria-expanded", String(open));
+          toggle.querySelector("span")!.textContent = open ? "−" : "+";
+        });
+        header.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && header.dataset.menuOpen === "true") {
+            close();
+            toggle.focus();
+          }
+        });
+        header
+          .querySelectorAll("nav a")
+          .forEach((link) => link.addEventListener("click", close));
+      }
+    </script>
+  </body>
+</html>

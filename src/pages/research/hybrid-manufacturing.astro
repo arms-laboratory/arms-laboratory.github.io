@@ -1,0 +1,196 @@
+---
+import Base from "../../layouts/Base.astro";
+---
+
+<Base
+  title="Hybrid Manufacturing"
+  description="ARMS researches CNC machining and directed energy deposition hybrid manufacturing."
+  current="/research/hybrid-manufacturing/"
+>
+  <section class="section detail-intro">
+    <p class="eyebrow">Research / Hybrid manufacturing</p>
+    <h1>
+      Connecting deposition
+      <br />
+      and machining.
+    </h1>
+    <p class="lead">
+      We investigate how CNC machining and directed energy deposition can be
+      combined to build and finish parts, linking process planning, deposition
+      control, and experimental measurement.
+    </p>
+    <figure>
+      <img
+        class="detail-photo"
+        src="/images/hybrid-cover.webp"
+        width="1067"
+        height="711"
+        alt="LT65 setup with laser deposition head and monitoring instrumentation"
+      />
+      <figcaption>LT65 hybrid manufacturing setup.</figcaption>
+    </figure>
+  </section>
+  <section class="section soft">
+    <p class="eyebrow">Explore the research</p>
+    <h2>Study the process. Examine the part.</h2>
+    <nav
+      class="project-nav"
+      aria-label="Hybrid manufacturing research examples"
+    >
+      <a href="#grid-molding">
+        01 / Grid molding <span aria-hidden="true">↓</span>
+      </a>
+      <a href="#ded-control">
+        02 / DED process control <span aria-hidden="true">↓</span>
+      </a>
+      <a href="#process-planning">
+        03 / Process selection <span aria-hidden="true">↓</span>
+      </a>
+    </nav>
+    <div class="three">
+      <div>
+        <h3>Process planning</h3>
+        <p>
+          Investigate the relationship between material addition and material
+          removal.
+        </p>
+      </div>
+      <div>
+        <h3>Deposition control</h3>
+        <p>Explore how process decisions affect the deposited material.</p>
+      </div>
+      <div>
+        <h3>Experimental measurement</h3>
+        <p>Use instrumented experiments to examine process behavior.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="grid-molding">
+    <p class="eyebrow">Example research / Grid molding</p>
+    <h2 class="grid-heading">
+      Conformal grid plastic injection mold fabricated by machining/DED hybrid
+      manufacturing
+    </h2>
+    <div class="grid-overview">
+      <p>
+        Prepared blocks are assembled into an approximate mold body. Directed
+        energy deposition then forms a continuous surface over the blocks,
+        followed by finish milling to produce the final geometry. The hybrid
+        process incorporates a three-dimensional cooling grid. After optimizing
+        the design, ARMS fabricated a prototype and compared it with molds
+        produced by other methods; the cooling grid delivered a significant
+        improvement in cooling performance.
+      </p>
+      <figure>
+        <img
+          src="/images/grid-mold.webp"
+          width="1800"
+          height="1200"
+          loading="lazy"
+          alt="Conformal grid plastic injection mold with two machined cavities"
+        />
+        <figcaption>Conformal grid plastic injection mold.</figcaption>
+      </figure>
+    </div>
+    <figure>
+      <div
+        class="diagram-scroll"
+        tabindex="0"
+        role="region"
+        aria-label="Grid molding process diagram; scroll horizontally to inspect on small screens"
+      >
+        <img
+          src="/images/grid-process.webp"
+          width="1800"
+          height="483"
+          loading="lazy"
+          alt="Grid molding sequence showing prepared blocks, a three-dimensional cooling grid, and the final deposited and machined mold surface"
+        />
+      </div>
+      <figcaption>
+        Grid molding technique: prepared blocks, a three-dimensional cooling
+        grid, and the deposited and machined mold surface.
+      </figcaption>
+    </figure>
+  </section>
+  <section class="section soft" id="ded-control">
+    <p class="eyebrow">Example research / DED process control</p>
+    <h2>
+      Adaptive, Productive, and Quality (APQ) control for directed energy
+      deposition
+    </h2>
+    <p>
+      ARMS is developing an integrated DED process control system that combines
+      monitoring of deposition height, width, and temperature with coordinated
+      regulation of energy fluence and powder fluence. An in-house Dynamic
+      Powder Splitting System (DPSS) enables powder delivery control within this
+      framework. The research aims to coordinate deposition geometry and thermal
+      conditions while addressing productivity and part quality.
+    </p>
+    <figure class="wide-figure">
+      <img
+        class="apq-diagram"
+        src="/images/apq-control-lossless.webp"
+        width="1200"
+        height="671"
+        loading="lazy"
+        alt="APQ control system linking temperature, deposition height, and width measurements to energy and geometry control modules and powder delivery through the DPSS"
+      />
+      <figcaption>
+        APQ DED control architecture, integrating monitoring, energy control,
+        and DPSS-based powder delivery.
+        <a class="figure-enlarge" href="/images/apq-control-lossless.webp">
+          Open full-size control diagram ↗
+        </a>
+      </figcaption>
+    </figure>
+  </section>
+  <section class="section" id="process-planning">
+    <p class="eyebrow">Example research / Process planning</p>
+    <h2>Decision-support software for machining/DED process selection</h2>
+    <p>
+      Choosing how to produce a part on a machining/DED hybrid machine tool
+      requires comparing three strategies: machining alone, DED alone, or an
+      integrated hybrid route. This decision typically depends on specialized
+      process knowledge and detailed, time-intensive planning. ARMS
+      process-selection software evaluates candidate routes and helps users
+      identify a preferred manufacturing approach based on productivity,
+      material cost, and energy consumption.
+    </p>
+    <figure class="wide-figure">
+      <img
+        src="/images/process-selection.webp"
+        width="1800"
+        height="1014"
+        loading="lazy"
+        alt="ARMS process-selection software showing a component decomposed into features for machining, DED, or hybrid manufacturing analysis"
+      />
+      <figcaption>
+        Process-selection software for evaluating machining, DED, and hybrid
+        manufacturing routes.
+        <a class="figure-enlarge" href="/images/process-selection.webp">
+          Open full-size software figure ↗
+        </a>
+      </figcaption>
+    </figure>
+  </section>
+  <section class="section reading-link">
+    <span class="role">Publications</span>
+    <a href="/publications/">Browse ARMS publications →</a>
+  </section>
+  <section class="section closing">
+    <h2>Interested in hybrid manufacturing?</h2>
+    <p>
+      We welcome student inquiries and discussions of related industrial
+      research challenges.
+    </p>
+    <div class="actions">
+      <a class="button primary" href="/open-positions/">
+        Student inquiry information →
+      </a>
+      <a class="button secondary" href="mailto:msoshi@ucdavis.edu">
+        Discuss collaboration
+      </a>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,46 @@
+---
+import AgentDiagram from "./AgentDiagram.astro";
+---
+
+<div class="research-grid">
+  <article>
+    <div class="research-media">
+      <AgentDiagram compact />
+    </div>
+    <div class="research-copy">
+      <p class="research-index">01 / Software &amp; systems</p>
+      <h3>Agentic Manufacturing</h3>
+      <p>
+        Investigating software agents that operate and coordinate CAD, CAM, and
+        CNC systems to reduce reliance on manual operator interaction.
+      </p>
+      <a href="/research/agentic-manufacturing/">
+        Explore Agentic Manufacturing →
+      </a>
+    </div>
+  </article>
+  <article>
+    <div class="research-media">
+      <img
+        src="/images/home-hybrid.webp"
+        srcset="/images/home-hybrid-720.webp 720w, /images/home-hybrid.webp 1620w"
+        sizes="(max-width: 620px) calc(100vw - 44px), 46vw"
+        width="1620"
+        height="1365"
+        loading="lazy"
+        alt="LT65 hybrid machine setup with deposition equipment"
+      />
+    </div>
+    <div class="research-copy">
+      <p class="research-index">02 / Processes &amp; machines</p>
+      <h3>Machining/DED hybrid manufacturing</h3>
+      <p>
+        Investigating how deposition and machining can work together, from
+        process planning to experimental measurement.
+      </p>
+      <a href="/research/hybrid-manufacturing/">
+        Explore hybrid manufacturing →
+      </a>
+    </div>
+  </article>
+</div>

@@ -1,0 +1,31 @@
+---
+import Base from "../../layouts/Base.astro";
+import ResearchCards from "../../components/ResearchCards.astro";
+---
+
+<Base
+  title="Research"
+  description="Explore ARMS research in Agentic Manufacturing and machining/DED hybrid manufacturing."
+  current="/research/"
+>
+  <section class="section detail-intro research-intro">
+    <p class="eyebrow">Research at ARMS</p>
+    <h1>
+      From software
+      <br />
+      to the manufactured part.
+    </h1>
+    <p class="lead">
+      We investigate Agentic Manufacturing and machining/DED hybrid processes,
+      bringing together software, machines, and experiments to address
+      manufacturing challenges.
+    </p>
+  </section>
+  <section class="section research-section">
+    <ResearchCards />
+  </section>
+  <section class="section reading-link">
+    <span class="role">Publications</span>
+    <a href="/publications/">Browse all 44 ARMS publications →</a>
+  </section>
+</Base>

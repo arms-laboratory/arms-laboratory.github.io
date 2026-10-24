@@ -1,0 +1,62 @@
+---
+import Base from "../../layouts/Base.astro";
+import AgentDiagram from "../../components/AgentDiagram.astro";
+---
+
+<Base
+  title="Agentic Manufacturing"
+  description="ARMS investigates software agents that operate CAD, CAM, and CNC systems."
+  current="/research/agentic-manufacturing/"
+>
+  <section class="section detail-intro">
+    <p class="eyebrow">Research / Agentic Manufacturing</p>
+    <h1>Software agents for the manufacturing workflow.</h1>
+    <p class="lead">
+      ARMS investigates agents that operate and coordinate traditional
+      manufacturing software and machines, with the goal of reducing reliance on
+      manual interaction across CAD, CAM, and CNC.
+    </p>
+    <AgentDiagram />
+  </section>
+  <section class="section soft">
+    <p class="eyebrow">The research direction</p>
+    <h2>Connect the steps from design to manufacture.</h2>
+    <div class="three">
+      <div>
+        <h3>Design Operator Agent</h3>
+        <p>Working with CAD software and design inputs.</p>
+      </div>
+      <div>
+        <h3>CAM Operator Agent</h3>
+        <p>Working with manufacturing planning software.</p>
+      </div>
+      <div>
+        <h3>Machine Operator Agent</h3>
+        <p>Working with CNC machine tools.</p>
+      </div>
+    </div>
+    <p class="note">
+      These roles describe the research concept; they do not assert a
+      demonstrated level of autonomy.
+    </p>
+  </section>
+  <section class="section reading-link">
+    <span class="role">Publications</span>
+    <a href="/publications/">Browse ARMS publications →</a>
+  </section>
+  <section class="section closing">
+    <h2>Interested in Agentic Manufacturing?</h2>
+    <p>
+      We welcome student inquiries and discussions of related industrial
+      research challenges.
+    </p>
+    <div class="actions">
+      <a class="button primary" href="/open-positions/">
+        Student inquiry information →
+      </a>
+      <a class="button secondary" href="mailto:msoshi@ucdavis.edu">
+        Discuss collaboration
+      </a>
+    </div>
+  </section>
+</Base>

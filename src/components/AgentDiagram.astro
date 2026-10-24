@@ -1,0 +1,44 @@
+---
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+const stages = [
+  { agent: "Design", system: "CAD", description: "Design software" },
+  { agent: "CAM", system: "CAM", description: "Planning software" },
+  { agent: "Machine", system: "CNC", description: "Machine tool" },
+];
+---
+
+<div
+  class:list={["agent-diagram", { "agent-diagram--compact": compact }]}
+  role="img"
+  aria-label="Conceptual workflow: design inputs move through Design, CAM, and Machine Operator Agents. Each agent exchanges information with CAD, CAM, or CNC systems. Geometry, toolpaths, and manufacturing instructions pass between stages."
+>
+  <span class="diagram-label">AGENTIC MANUFACTURING / RESEARCH CONCEPT</span>
+  <div class="diagram-input">
+    Design inputs &amp; manufacturing requirements
+  </div>
+  <div class="diagram-columns">
+    {stages.map((stage) => (
+      <div>
+        <strong>
+          {stage.agent}
+          <br />
+          Operator Agent
+        </strong>
+        <div class="diagram-exchange">
+          <span class="diagram-arrow">↕</span>
+          <span>Operate / observe</span>
+        </div>
+        <b>
+          {stage.system}
+          <small>{stage.description}</small>
+        </b>
+      </div>
+    ))}
+  </div>
+  <div class="diagram-flow">
+    Design geometry → Toolpaths &amp; instructions → Manufacturing
+  </div>
+</div>

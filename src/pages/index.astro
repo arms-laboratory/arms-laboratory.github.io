@@ -1,0 +1,168 @@
+---
+import Base from "../layouts/Base.astro";
+import ResearchCards from "../components/ResearchCards.astro";
+---
+
+<Base
+  title="Advanced manufacturing research"
+  description="ARMS Laboratory at UC Davis researches Agentic Manufacturing and machining/DED hybrid manufacturing."
+  current="/"
+>
+  <section class="section home-opening">
+    <div class="opening-copy">
+      <p class="eyebrow">ARMS Laboratory / UC Davis</p>
+      <h1>
+        Connecting software,
+        <br />
+        machines, and
+        <br />
+        <span>manufacturing.</span>
+      </h1>
+      <p class="lead">
+        We investigate Agentic Manufacturing and machining–DED hybrid processes,
+        connecting software agents with experimental manufacturing research.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="#research">
+          Explore our research <span aria-hidden="true">↘</span>
+        </a>
+        <a class="text-link" href="/open-positions/">
+          Join ARMS <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <p class="opening-name">
+        Advanced Research for
+        <br />
+        Manufacturing Systems
+      </p>
+    </div>
+    <figure class="opening-image">
+      <img
+        src="/images/hero-ded.webp"
+        srcset="/images/hero-ded-720.webp 720w, /images/hero-ded.webp 1800w"
+        sizes="(max-width: 760px) calc(100vw - 40px), 52vw"
+        width="1800"
+        height="1800"
+        fetchpriority="high"
+        alt="Instrumented directed energy deposition experiment in the ARMS laboratory"
+      />
+      <figcaption>
+        <span>Inside ARMS</span> Experimental directed energy deposition
+        research.
+      </figcaption>
+    </figure>
+  </section>
+  <section class="section research-section" id="research">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Our research</p>
+        <h2>
+          Two research directions.
+          <br />
+          One experimental foundation.
+        </h2>
+      </div>
+      <p>
+        From software-driven workflows to the interaction of deposition and
+        cutting.
+      </p>
+    </div>
+    <ResearchCards />
+  </section>
+  <div class="section home-reading">
+    <p>
+      <span class="reading-number">44</span> publications in manufacturing
+      research
+    </p>
+    <a class="text-link" href="/publications/">
+      Explore the bibliography <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+  <section class="section lab-introduction" id="about">
+    <div>
+      <p class="eyebrow">The laboratory</p>
+      <h2>
+        Manufacturing research.
+        <br />
+        At UC Davis since 2013.
+      </h2>
+    </div>
+    <div>
+      <p>
+        Founded by Professor Masakazu Soshi, ARMS brings together CNC machine
+        tools, machining processes, and additive manufacturing.
+      </p>
+      <a class="text-link" href="/about/">
+        About the laboratory <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+  <section class="section home-people" id="people">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Our people</p>
+        <h2>Research is a team effort.</h2>
+      </div>
+      <a class="text-link" href="/members/">
+        Meet the researchers <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <div class="people-roster">
+      <div>
+        <p class="role">Principal Investigator</p>
+        <h3>Masakazu Soshi</h3>
+        <a href="https://faculty.engineering.ucdavis.edu/soshi/">
+          Faculty profile ↗
+        </a>
+      </div>
+      <div>
+        <p class="role">Master’s student</p>
+        <h3>Charles Ringham</h3>
+      </div>
+      <div>
+        <p class="role">PhD student</p>
+        <h3>Ryan Daugherty</h3>
+      </div>
+      <div>
+        <p class="role">MS student</p>
+        <h3>Advay Prasad</h3>
+      </div>
+    </div>
+  </section>
+  <section class="section home-join" id="join">
+    <div>
+      <p class="eyebrow">Student research at ARMS</p>
+      <h2>
+        Build your future
+        <br />
+        through research.
+      </h2>
+    </div>
+    <div>
+      <p>
+        Graduate students form the core of research at ARMS, advancing our work
+        in manufacturing systems and processes through experimental research.
+      </p>
+      <p>
+        We welcome inquiries from undergraduate, master’s, and PhD students.
+        Tell us about your background and research interests.
+      </p>
+      <div class="actions">
+        <a class="button light" href="/open-positions/">
+          Student research at ARMS <span aria-hidden="true">↗</span>
+        </a>
+        <a
+          class="inquiry-link"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSfzkuls8SktTR6h8LjhqNDLTKo2afUI3-cOIgn7XEoejJseMg/viewform"
+        >
+          Send an inquiry ↗
+        </a>
+      </div>
+    </div>
+    <div class="industry-inline">
+      <p class="eyebrow">Industry collaboration</p>
+      <p>Start with a manufacturing challenge.</p>
+      <a href="mailto:msoshi@ucdavis.edu">Contact Professor Soshi ↗</a>
+    </div>
+  </section>
+</Base>

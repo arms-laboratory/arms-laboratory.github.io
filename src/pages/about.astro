@@ -1,0 +1,87 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="About ARMS"
+  description="About the ARMS Laboratory, its mission and experimental capabilities at UC Davis."
+  current="/about/"
+>
+  <section class="section narrow detail-intro" id="about">
+    <p class="eyebrow">About ARMS</p>
+    <h1>
+      Manufacturing research.
+      <br />
+      Developing researchers.
+    </h1>
+    <p>
+      Founded by Professor Masakazu Soshi in January 2013, the Advanced Research
+      for Manufacturing Systems (ARMS) Laboratory studies CNC machine tools,
+      machining processes, and additive manufacturing. Today, our research
+      focuses on Agentic Manufacturing and machining/DED hybrid manufacturing,
+      bringing together software, machines, and experiments to address
+      manufacturing challenges.
+    </p>
+  </section>
+  <section class="section split capabilities">
+    <figure>
+      <img
+        src="/images/cmm.webp"
+        srcset="/images/cmm-720.webp 720w, /images/cmm.webp 1800w"
+        sizes="(max-width: 620px) calc(100vw - 44px), 46vw"
+        width="1800"
+        height="1350"
+        loading="lazy"
+        alt="Coordinate measuring machine measuring a manufactured sample"
+      />
+      <figcaption>
+        Coordinate measurement supports experimental evaluation.
+      </figcaption>
+    </figure>
+    <div>
+      <p class="eyebrow">Experimental capabilities</p>
+      <h2>Research grounded in making and measuring.</h2>
+      <p>
+        ARMS brings together CNC machining, directed energy deposition, and
+        measurement to investigate manufacturing processes and equipment.
+        Students learn through hands-on experimental work.
+      </p>
+    </div>
+  </section>
+  <section class="section" id="mission">
+    <p class="eyebrow">Our mission</p>
+    <h2>Advance manufacturing. Develop researchers.</h2>
+    <div class="three">
+      <div>
+        <h3>A supportive research team</h3>
+        <p>
+          Build an open-minded, friendly environment where people share
+          knowledge, take initiative, and grow through collaboration.
+        </p>
+      </div>
+      <div>
+        <h3>Research shaped by industrial needs</h3>
+        <p>
+          Work with collaborators on real manufacturing problems, pursuing
+          results that benefit industry, academia, and society.
+        </p>
+      </div>
+      <div>
+        <h3>Learning through hands-on research</h3>
+        <p>
+          Help students develop skills and independent judgment through training
+          and experimental research.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="section narrow">
+    <p class="eyebrow">Industry collaboration</p>
+    <h2>Start with a manufacturing challenge.</h2>
+    <p>
+      Discuss research questions related to manufacturing software, machining,
+      or hybrid processes.
+    </p>
+    <a href="mailto:msoshi@ucdavis.edu">Contact Professor Soshi →</a>
+  </section>
+</Base>
