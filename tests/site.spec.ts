@@ -45,6 +45,9 @@ test("homepage research cards align and images load", async ({
   page,
 }, testInfo) => {
   await page.goto("/");
+  await expect(page).toHaveTitle(
+    "Advanced Research for Manufacturing Systems | ARMS Laboratory, UC Davis",
+  );
   for (const image of await page.locator("main img").all()) {
     await image.scrollIntoViewIfNeeded();
     await expect
