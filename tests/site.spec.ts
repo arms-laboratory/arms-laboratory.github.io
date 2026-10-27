@@ -21,6 +21,10 @@ for (const route of routes) {
     const response = await page.goto(route);
     expect(response?.status()).toBe(200);
     await expect(page.locator("h1")).toHaveCount(1);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      `https://arms.engr.ucdavis.edu${route}`,
+    );
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,
@@ -186,4 +190,19 @@ test("reduced motion disables smooth scrolling", async ({ page }) => {
       () => getComputedStyle(document.documentElement).scrollBehavior,
     ),
   ).toBe("auto");
+});
+
+test("search engine files use the university domain", async ({ request }) => {
+  const robots = await request.get("/robots.txt");
+  expect(robots.status()).toBe(200);
+  expect(await robots.text()).toContain(
+    "Sitemap: https://arms.engr.ucdavis.edu/sitemap.xml",
+  );
+  const sitemap = await request.get("/sitemap.xml");
+  expect(sitemap.status()).toBe(200);
+  const xml = await sitemap.text();
+  expect(xml).not.toContain("https://arms-laboratory.github.io");
+  expect(xml.match(/<loc>https:\/\/arms\.engr\.ucdavis\.edu\//g)?.length).toBe(
+    9,
+  );
 });

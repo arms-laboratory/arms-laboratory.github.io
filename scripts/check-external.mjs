@@ -11,7 +11,7 @@ function walk(dir) {
       for (const [, url] of readFileSync(path, "utf8").matchAll(
         /href="(https:\/\/[^" ]+)"/g,
       ))
-        if (!url.startsWith("https://arms-laboratory.github.io/"))
+        if (!url.startsWith("https://arms.engr.ucdavis.edu/"))
           urls.add(url.replaceAll("&amp;", "&"));
   }
 }

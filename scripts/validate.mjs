@@ -31,7 +31,7 @@ for (const file of htmlFiles) {
       .slice(root.length)
       .replaceAll("\\", "/")
       .replace(/index\.html$/, "");
-    const url = new URL(value, `https://arms-laboratory.github.io${sitePath}`);
+    const url = new URL(value, `https://arms.engr.ucdavis.edu${sitePath}`);
     const target = resolve(
       root,
       decodeURIComponent(url.pathname).slice(1),

@@ -1,6 +1,6 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://arms-laboratory.github.io",
+  site: "https://arms.engr.ucdavis.edu",
   output: "static",
 });
