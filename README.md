@@ -1,6 +1,6 @@
 # ARMS Laboratory website
 
-Static Astro and TypeScript source for the ARMS Laboratory at the University of California, Davis. Initial public address: https://arms-laboratory.github.io.
+Static Astro and TypeScript source for the ARMS Laboratory at the University of California, Davis. Public address: https://arms.engr.ucdavis.edu.
 
 ## Develop and review
 
@@ -33,18 +33,16 @@ Original photographs, internal notes, local review snapshots, dependency folders
 
 ## GitHub Pages
 
-Create an empty **public** repository named `arms-laboratory.github.io` owned by the `arms-laboratory` organization. Leave GitHub's README, license, and `.gitignore` initialization options unchecked when importing this prepared repository.
-
-After the reviewed source is approved for its first public push, connect that repository as `origin` and push `main`. In repository **Settings → Pages**, choose **GitHub Actions** as the publishing source. Check the Actions result and review https://arms-laboratory.github.io in desktop and mobile browsers.
+The public repository is `arms-laboratory/arms-laboratory.github.io`, owned by the `arms-laboratory` organization. GitHub Pages uses **GitHub Actions** as its publishing source. The website is served at https://arms.engr.ucdavis.edu.
 
 Every push to `main` runs validation and deployment. Pull requests run the same checks without deployment. The workflow installs locked dependencies, checks formatting and types, builds the static site, validates internal links, runs browser and accessibility checks, and deploys the generated artifact only after those checks pass. It uses the built-in short-lived GitHub token with read-only build access and narrowly scoped Pages deployment permissions.
 
-After the first successful workflow, protect `main`: require pull requests and the `build` status check, and disable force pushes and branch deletion. Routine updates should be reviewed in a pull request before merging.
+`main` is protected: use a branch and pull request for changes. The `build` status check must pass before merging; force pushes and branch deletion are disabled. Review the preview before merging, because merging to `main` publishes the update.
 
-## Domain and release review
+## Custom domain
 
-The intended future address is https://arms.engr.ucdavis.edu. Keep the initial `astro.config.mjs` site setting and sitemap on the GitHub Pages address during review. Do not configure a custom domain or change university DNS until the GitHub Pages version has been approved.
+University IT manages DNS for `arms.engr.ucdavis.edu`, which points to `arms-laboratory.github.io`. The university hostname must also remain configured in repository **Settings → Pages → Custom domain**, with HTTPS enforced once its certificate is provisioned. A repository `CNAME` file is not required for this GitHub Actions workflow.
 
-At the approved domain transition, coordinate GitHub Pages custom-domain settings and DNS with university IT, update the site URL and sitemap, and verify HTTPS and all retained page paths. A repository `CNAME` file is not required for this GitHub Actions publishing workflow.
+The `site` value in `astro.config.mjs`, the sitemap and robots.txt use the university address. The generated canonical links should always use HTTPS on that address. Keep these settings consistent when changing domains.
 
-Before the university cutover, confirm member details and image publication permissions, test the student inquiry form, inspect external destinations and accessibility manually, and measure performance on the deployed site.
+Retain the prior university website archive separately from this repository. Before retiring any previous hosting, confirm the archive with university IT. After domain or hosting changes, verify HTTPS, retained page paths, the student inquiry form, external links, accessibility and deployed performance.
