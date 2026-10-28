@@ -1,0 +1,58 @@
+---
+interface Props {
+  videoId: string;
+  title: string;
+  description: string;
+  poster: string;
+}
+const { videoId, title, description, poster } = Astro.props;
+---
+
+<figure class="research-video">
+  <div class="video-frame" data-video-id={videoId} data-video-title={title}>
+    <img src={poster} alt="" width="1280" height="720" loading="lazy" />
+    <button
+      class="video-load"
+      type="button"
+      aria-label={`Watch demonstration: ${title}`}
+      hidden
+    >
+      <span class="video-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+          <path d="M8 5v14l11-7z"></path>
+        </svg>
+      </span>
+      <span>Watch demonstration</span>
+    </button>
+  </div>
+  <figcaption>
+    <strong class="video-title">{title}</strong>
+    <span class="video-description">{description}</span>
+    <a href={`https://www.youtube.com/watch?v=${videoId}`}>
+      Watch on YouTube ↗
+    </a>
+  </figcaption>
+</figure>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".video-frame").forEach((frame) => {
+    const button = frame.querySelector<HTMLButtonElement>(".video-load");
+    if (!button) return;
+    button.hidden = false;
+    button.addEventListener(
+      "click",
+      () => {
+        const player = document.createElement("iframe");
+        player.src = `https://www.youtube-nocookie.com/embed/${frame.dataset.videoId}?rel=0`;
+        player.title =
+          frame.dataset.videoTitle ?? "ARMS research demonstration";
+        player.allow = "encrypted-media; picture-in-picture; fullscreen";
+        player.allowFullscreen = true;
+        player.referrerPolicy = "strict-origin-when-cross-origin";
+        frame.replaceChildren(player);
+        player.focus();
+      },
+      { once: true },
+    );
+  });
+</script>

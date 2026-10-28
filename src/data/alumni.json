@@ -1,0 +1,94 @@
+[
+  { "name": "Kazi Owais Ahmed, Ph.D.", "education": ["Ph.D.: UC Davis, 2026"] },
+  { "name": "Weijun Zhang, Ph.D.", "education": ["Ph.D.: UC Davis, 2026"] },
+  {
+    "name": "Mark Wiscombe",
+    "education": ["BS: UC Santa Barbara, 2018", "MS: UC Davis, 2025"]
+  },
+  {
+    "name": "Muqing Yang",
+    "education": ["BS: UC Davis, 2020", "MS: UC Davis, 2024"]
+  },
+  {
+    "name": "Marc Corfmat",
+    "education": ["BS: UC Davis, 2023", "MS: UC Davis, 2024"]
+  },
+  { "name": "Geng Li, Ph.D.", "education": ["Ph.D.: UC Davis, 2022"] },
+  {
+    "name": "Zhenzhuo Tan",
+    "education": ["BS: CSU Sacramento, 2020", "MS: UC Davis, 2022"]
+  },
+  {
+    "name": "Giulio Carcasci",
+    "education": ["MS: UniFl (University of Florence, Italy), 2022"]
+  },
+  {
+    "name": "Kyle Odum, Ph.D.",
+    "education": ["Ph.D.: UC Davis, 2019"],
+    "role": "Development engineer, 2019–2021"
+  },
+  { "name": "Dillon Thoms", "education": ["MS: UC Davis, 2021"] },
+  { "name": "Vivian Zhou", "education": ["MS: UC Davis, 2021"] },
+  { "name": "Divij Patil", "education": ["MS: UC Davis, 2020"] },
+  { "name": "Nicholas Magnasco", "education": ["MS: UC Davis, 2020"] },
+  {
+    "name": "Curtis Yau",
+    "education": ["MS: UC Davis, 2019"],
+    "role": "Development engineer, 2019–2020"
+  },
+  {
+    "name": "Jess Dill",
+    "education": [
+      "BS: Rochester Institute of Technology, 2015",
+      "MS: UC Davis, 2019"
+    ]
+  },
+  {
+    "name": "Wei Li, Ph.D.",
+    "education": [],
+    "role": "Postdoctoral researcher, 2018–2019"
+  },
+  {
+    "name": "Leslie Leung",
+    "education": ["BS: UC Berkeley, 2016", "MS: UC Davis, 2019"]
+  },
+  {
+    "name": "Christian Young",
+    "education": ["BS: UC Davis, 2015", "MS: UC Davis, 2018"]
+  },
+  {
+    "name": "Kory Chang",
+    "education": ["BS: UC Riverside, 2014", "MS: UC Davis, 2016"]
+  },
+  {
+    "name": "Alex Jensen",
+    "education": [
+      "BS: California Polytechnic State University (SLO), 2011",
+      "MS: UC Davis, 2014"
+    ]
+  },
+  {
+    "name": "Babak Kianmajd",
+    "education": ["BS: UC Davis, 2011", "MS: UC Davis, 2015"]
+  },
+  {
+    "name": "Norman Lei",
+    "education": ["BS: UC Davis, 2011", "MS: UC Davis, 2016"]
+  },
+  {
+    "name": "Derek Pell",
+    "education": ["BS: UC Davis, 2012", "MS: UC Davis, 2017"]
+  },
+  {
+    "name": "Nicholas Raymond",
+    "education": ["BS: UC Davis, 2013", "MS: UC Davis, 2016"]
+  },
+  {
+    "name": "Jonathan Ring",
+    "education": ["BS: UC Davis, 2015", "MS: UC Davis, 2017"]
+  },
+  {
+    "name": "Shuai Zhao",
+    "education": ["BS: USTC (China), 2013", "MS: UC Davis, 2015"]
+  }
+]

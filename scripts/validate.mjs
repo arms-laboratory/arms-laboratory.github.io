@@ -63,8 +63,18 @@ function statExists(path) {
   }
 }
 const pubs = readFileSync(join(root, "publications", "index.html"), "utf8");
-if ([...pubs.matchAll(/class="pub-entry"/g)].length !== 44)
-  errors.push("Expected exactly 44 publication records");
+const publicationRecords = JSON.parse(
+  readFileSync(
+    new URL("../src/data/publications.json", import.meta.url),
+    "utf8",
+  ),
+);
+if (
+  [...pubs.matchAll(/class="pub-entry"/g)].length !== publicationRecords.length
+)
+  errors.push(
+    `Expected exactly ${publicationRecords.length} publication records`,
+  );
 if (
   !readFileSync(join(root, "index.html"), "utf8").includes(
     "1FAIpQLSfzkuls8SktTR6h8LjhqNDLTKo2afUI3-cOIgn7XEoejJseMg",
@@ -76,5 +86,5 @@ if (errors.length) {
   process.exitCode = 1;
 } else
   console.log(
-    `Validated ${htmlFiles.length} pages, 44 publications, internal links and anchors. ${external.size} unique external URLs for live checks.`,
+    `Validated ${htmlFiles.length} pages, ${publicationRecords.length} publications, internal links and anchors. ${external.size} unique external URLs for live checks.`,
   );

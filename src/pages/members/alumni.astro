@@ -1,0 +1,33 @@
+---
+import Base from "../../layouts/Base.astro";
+import alumni from "../../data/alumni.json";
+---
+
+<Base
+  title="Alumni"
+  description="Meet ARMS Laboratory alumni and past researchers at UC Davis."
+  current="/members/alumni/"
+>
+  <section class="section alumni-page">
+    <p class="eyebrow">People / Alumni</p>
+    <h1>Our alumni.</h1>
+    <p class="lead">
+      Graduate student researchers and past researchers who have helped shape
+      manufacturing research at ARMS.
+    </p>
+    <a class="text-link" href="/members/">
+      ← Meet the current researchers
+    </a>
+    <ul class="alumni-list">
+      {alumni.map((person) => (
+        <li>
+          <h2>{person.name}</h2>
+          {person.education.map((degree) => (
+            <p>{degree}</p>
+          ))}
+          {person.role && <p class="note">{person.role}</p>}
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>

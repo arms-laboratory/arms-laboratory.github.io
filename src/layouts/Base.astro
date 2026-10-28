@@ -53,6 +53,7 @@ const nav = [
             href={href}
             aria-current={
               current === href ||
+              (href === "/members/" && current.startsWith("/members/")) ||
               (href === "/research/" && current.startsWith("/research/"))
                 ? "page"
                 : undefined
