@@ -67,13 +67,13 @@ import RelatedPublications from "../../components/RelatedPublications.astro";
       </div>
     </div>
   </section>
-  <section class="section" id="grid-molding">
+  <section class="section research-example" id="grid-molding">
     <p class="eyebrow">Example research / Grid molding</p>
     <h2 class="grid-heading">
       Conformal grid plastic injection mold fabricated by machining/DED hybrid
       manufacturing
     </h2>
-    <div class="grid-overview">
+    <div class="project-layout">
       <div class="project-story">
         <h3>Problem</h3>
         <p>
@@ -95,7 +95,7 @@ import RelatedPublications from "../../components/RelatedPublications.astro";
           with more effective internal cooling.
         </p>
       </div>
-      <figure>
+      <figure class="wide-figure">
         <img
           src="/images/grid-mold.webp"
           width="1800"
@@ -139,71 +139,73 @@ import RelatedPublications from "../../components/RelatedPublications.astro";
     </div>
     <RelatedPublications ids={["23"]} />
   </section>
-  <section class="section soft" id="ded-control">
+  <section class="section soft research-example" id="ded-control">
     <p class="eyebrow">Example research / DED process control</p>
     <h2>
       Adaptive, Productive, and Quality (APQ) control for directed energy
       deposition
     </h2>
-    <div class="project-story ded-story">
-      <h3>Problem</h3>
-      <p>
-        DED often relies on preset laser power, machine feed rate, and powder
-        flow. Actual deposition can deviate from the intended geometry, leaving
-        insufficient material and requiring additional deposition—or restarting
-        the build. A key challenge for closed-loop control is adjusting powder
-        delivery quickly enough to correct these deviations.
-      </p>
-      <p>
-        Thermal management presents another challenge. The substantial heat
-        input creates temperature gradients that can lead to distortion,
-        cracking, and residual stresses.
-      </p>
-      <h3>Approach</h3>
-      <p>
-        ARMS developed a Dynamic Powder Splitting System (DPSS) that rapidly
-        adjusts powder delivery, enabling responsive closed-loop deposition
-        control. The broader Adaptive, Productive, and Quality (APQ) framework
-        combines monitoring of deposition height, width, and temperature with
-        coordinated regulation of energy fluence and powder fluence.
-      </p>
-      <p>
-        To address thermal gradients, the ALP module uses an infrared camera to
-        assess the temperature distribution after each deposited layer. The
-        controller then automatically reorders the deposition sequence in the
-        supplied NC program to reduce temperature gradients.
-      </p>
-      <h3>Demonstrated result</h3>
-      <p>
-        The developed control methods improved deposition productivity and
-        geometric accuracy, while adaptive sequencing addressed thermal
-        gradients during the build.
-      </p>
-    </div>
-    <div class="project-media-grid">
-      <figure class="wide-figure">
-        <img
-          class="apq-diagram"
-          src="/images/apq-control-lossless.webp"
-          width="1200"
-          height="671"
-          loading="lazy"
-          alt="APQ control system linking temperature, deposition height, and width measurements to energy and geometry control modules and powder delivery through the DPSS"
+    <div class="project-layout project-layout--with-media">
+      <div class="project-story">
+        <h3>Problem</h3>
+        <p>
+          DED often relies on preset laser power, machine feed rate, and powder
+          flow. Actual deposition can deviate from the intended geometry,
+          leaving insufficient material and requiring additional deposition—or
+          restarting the build. A key challenge for closed-loop control is
+          adjusting powder delivery quickly enough to correct these deviations.
+        </p>
+        <p>
+          Thermal management presents another challenge. The substantial heat
+          input creates temperature gradients that can lead to distortion,
+          cracking, and residual stresses.
+        </p>
+        <h3>Approach</h3>
+        <p>
+          ARMS developed a Dynamic Powder Splitting System (DPSS) that rapidly
+          adjusts powder delivery, enabling responsive closed-loop deposition
+          control. The broader Adaptive, Productive, and Quality (APQ) framework
+          combines monitoring of deposition height, width, and temperature with
+          coordinated regulation of energy fluence and powder fluence.
+        </p>
+        <p>
+          To address thermal gradients, the ALP module uses an infrared camera
+          to assess the temperature distribution after each deposited layer. The
+          controller then automatically reorders the deposition sequence in the
+          supplied NC program to reduce temperature gradients.
+        </p>
+        <h3>Demonstrated result</h3>
+        <p>
+          The developed control methods improved deposition productivity and
+          geometric accuracy, while adaptive sequencing addressed thermal
+          gradients during the build.
+        </p>
+      </div>
+      <div class="project-media-stack">
+        <figure class="wide-figure">
+          <img
+            class="apq-diagram"
+            src="/images/apq-control-lossless.webp"
+            width="1200"
+            height="671"
+            loading="lazy"
+            alt="APQ control system linking temperature, deposition height, and width measurements to energy and geometry control modules and powder delivery through the DPSS"
+          />
+          <figcaption>
+            APQ DED control architecture, integrating monitoring, energy
+            control, and DPSS-based powder delivery.
+            <a class="figure-enlarge" href="/images/apq-control-lossless.webp">
+              Open full-size control diagram ↗
+            </a>
+          </figcaption>
+        </figure>
+        <ResearchVideo
+          videoId="lYD_JZTOk1c"
+          title="PEF and QPF control for DED"
+          description="See the energy- and powder-fluence control methods in operation."
+          poster="/images/videos/pef-qpf-control.jpg"
         />
-        <figcaption>
-          APQ DED control architecture, integrating monitoring, energy control,
-          and DPSS-based powder delivery.
-          <a class="figure-enlarge" href="/images/apq-control-lossless.webp">
-            Open full-size control diagram ↗
-          </a>
-        </figcaption>
-      </figure>
-      <ResearchVideo
-        videoId="lYD_JZTOk1c"
-        title="PEF and QPF control for DED"
-        description="See the energy- and powder-fluence control methods in operation."
-        poster="/images/videos/pef-qpf-control.jpg"
-      />
+      </div>
     </div>
     <details class="more-demonstrations">
       <summary>
@@ -226,7 +228,7 @@ import RelatedPublications from "../../components/RelatedPublications.astro";
     </details>
     <RelatedPublications ids={["46", "8", "3"]} />
   </section>
-  <section class="section" id="process-planning">
+  <section class="section research-example" id="process-planning">
     <p class="eyebrow">Example research / Process planning</p>
     <h2>Decision-support software for machining/DED process selection</h2>
     <div class="project-layout">
