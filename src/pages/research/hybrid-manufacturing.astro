@@ -1,5 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
+import ResearchVideo from "../../components/ResearchVideo.astro";
+import RelatedPublications from "../../components/RelatedPublications.astro";
 ---
 
 <Base
@@ -72,15 +74,27 @@ import Base from "../../layouts/Base.astro";
       manufacturing
     </h2>
     <div class="grid-overview">
-      <p>
-        Prepared blocks are assembled into an approximate mold body. Directed
-        energy deposition then forms a continuous surface over the blocks,
-        followed by finish milling to produce the final geometry. The hybrid
-        process incorporates a three-dimensional cooling grid. After optimizing
-        the design, ARMS fabricated a prototype and compared it with molds
-        produced by other methods; the cooling grid delivered a significant
-        improvement in cooling performance.
-      </p>
+      <div class="project-story">
+        <h3>Problem</h3>
+        <p>
+          Effective cooling is essential to injection-molding productivity and
+          plastic-part dimensional accuracy. However, creating intricate cooling
+          channels within a mold is challenging.
+        </p>
+        <h3>Approach</h3>
+        <p>
+          We begin with a prefabricated cooling-channel structure, then use
+          hybrid directed energy deposition (DED) and machining to build and
+          finish the mold geometry above it. This approach incorporates complex
+          internal cooling passages into the finished mold.
+        </p>
+        <h3>Demonstrated result</h3>
+        <p>
+          The prototype demonstrated substantially improved cooling performance,
+          highlighting the potential of hybrid manufacturing to produce molds
+          with more effective internal cooling.
+        </p>
+      </div>
       <figure>
         <img
           src="/images/grid-mold.webp"
@@ -92,26 +106,38 @@ import Base from "../../layouts/Base.astro";
         <figcaption>Conformal grid plastic injection mold.</figcaption>
       </figure>
     </div>
-    <figure>
-      <div
-        class="diagram-scroll"
-        tabindex="0"
-        role="region"
-        aria-label="Grid molding process diagram; scroll horizontally to inspect on small screens"
-      >
-        <img
-          src="/images/grid-process.webp"
-          width="1800"
-          height="483"
-          loading="lazy"
-          alt="Grid molding sequence showing prepared blocks, a three-dimensional cooling grid, and the final deposited and machined mold surface"
-        />
-      </div>
-      <figcaption>
-        Grid molding technique: prepared blocks, a three-dimensional cooling
-        grid, and the deposited and machined mold surface.
-      </figcaption>
-    </figure>
+    <div class="project-media-grid grid-media">
+      <figure>
+        <div
+          class="diagram-scroll"
+          tabindex="0"
+          role="region"
+          aria-label="Grid molding process diagram; scroll horizontally to inspect on small screens"
+        >
+          <img
+            src="/images/grid-process.webp"
+            width="1800"
+            height="483"
+            loading="lazy"
+            alt="Grid molding sequence showing prepared blocks, a three-dimensional cooling grid, and the final deposited and machined mold surface"
+          />
+        </div>
+        <figcaption>
+          Grid molding technique: prepared blocks, a three-dimensional cooling
+          grid, and the deposited and machined mold surface.
+          <a class="figure-enlarge" href="/images/grid-process.webp">
+            Open full-size process diagram ↗
+          </a>
+        </figcaption>
+      </figure>
+      <ResearchVideo
+        videoId="CHoZDgIJ8vY"
+        title="Grid molding fabrication"
+        description="Follow the deposition and machining sequence used to fabricate the mold."
+        poster="/images/videos/grid-molding.jpg"
+      />
+    </div>
+    <RelatedPublications ids={["23"]} />
   </section>
   <section class="section soft" id="ded-control">
     <p class="eyebrow">Example research / DED process control</p>
@@ -119,60 +145,129 @@ import Base from "../../layouts/Base.astro";
       Adaptive, Productive, and Quality (APQ) control for directed energy
       deposition
     </h2>
-    <p>
-      ARMS is developing an integrated DED process control system that combines
-      monitoring of deposition height, width, and temperature with coordinated
-      regulation of energy fluence and powder fluence. An in-house Dynamic
-      Powder Splitting System (DPSS) enables powder delivery control within this
-      framework. The research aims to coordinate deposition geometry and thermal
-      conditions while addressing productivity and part quality.
-    </p>
-    <figure class="wide-figure">
-      <img
-        class="apq-diagram"
-        src="/images/apq-control-lossless.webp"
-        width="1200"
-        height="671"
-        loading="lazy"
-        alt="APQ control system linking temperature, deposition height, and width measurements to energy and geometry control modules and powder delivery through the DPSS"
+    <div class="project-story ded-story">
+      <h3>Problem</h3>
+      <p>
+        DED often relies on preset laser power, machine feed rate, and powder
+        flow. Actual deposition can deviate from the intended geometry, leaving
+        insufficient material and requiring additional deposition—or restarting
+        the build. A key challenge for closed-loop control is adjusting powder
+        delivery quickly enough to correct these deviations.
+      </p>
+      <p>
+        Thermal management presents another challenge. The substantial heat
+        input creates temperature gradients that can lead to distortion,
+        cracking, and residual stresses.
+      </p>
+      <h3>Approach</h3>
+      <p>
+        ARMS developed a Dynamic Powder Splitting System (DPSS) that rapidly
+        adjusts powder delivery, enabling responsive closed-loop deposition
+        control. The broader Adaptive, Productive, and Quality (APQ) framework
+        combines monitoring of deposition height, width, and temperature with
+        coordinated regulation of energy fluence and powder fluence.
+      </p>
+      <p>
+        To address thermal gradients, the ALP module uses an infrared camera to
+        assess the temperature distribution after each deposited layer. The
+        controller then automatically reorders the deposition sequence in the
+        supplied NC program to reduce temperature gradients.
+      </p>
+      <h3>Demonstrated result</h3>
+      <p>
+        The developed control methods improved deposition productivity and
+        geometric accuracy, while adaptive sequencing addressed thermal
+        gradients during the build.
+      </p>
+    </div>
+    <div class="project-media-grid">
+      <figure class="wide-figure">
+        <img
+          class="apq-diagram"
+          src="/images/apq-control-lossless.webp"
+          width="1200"
+          height="671"
+          loading="lazy"
+          alt="APQ control system linking temperature, deposition height, and width measurements to energy and geometry control modules and powder delivery through the DPSS"
+        />
+        <figcaption>
+          APQ DED control architecture, integrating monitoring, energy control,
+          and DPSS-based powder delivery.
+          <a class="figure-enlarge" href="/images/apq-control-lossless.webp">
+            Open full-size control diagram ↗
+          </a>
+        </figcaption>
+      </figure>
+      <ResearchVideo
+        videoId="lYD_JZTOk1c"
+        title="PEF and QPF control for DED"
+        description="See the energy- and powder-fluence control methods in operation."
+        poster="/images/videos/pef-qpf-control.jpg"
       />
-      <figcaption>
-        APQ DED control architecture, integrating monitoring, energy control,
-        and DPSS-based powder delivery.
-        <a class="figure-enlarge" href="/images/apq-control-lossless.webp">
-          Open full-size control diagram ↗
-        </a>
-      </figcaption>
-    </figure>
+    </div>
+    <details class="more-demonstrations">
+      <summary>
+        More DED demonstrations: powder delivery and thermal management
+      </summary>
+      <div class="video-grid">
+        <ResearchVideo
+          videoId="1j6TkN9_cVI"
+          title="DED process control with DPSS"
+          description="See how the Dynamic Powder Splitting System supports responsive powder delivery."
+          poster="/images/videos/dpss-control.jpg"
+        />
+        <ResearchVideo
+          videoId="lqQTS4TozRM"
+          title="DED ALP control"
+          description="Explore adaptive deposition sequencing for thermal management."
+          poster="/images/videos/alp-control.jpg"
+        />
+      </div>
+    </details>
+    <RelatedPublications ids={["46", "8", "3"]} />
   </section>
   <section class="section" id="process-planning">
     <p class="eyebrow">Example research / Process planning</p>
     <h2>Decision-support software for machining/DED process selection</h2>
-    <p>
-      Choosing how to produce a part on a machining/DED hybrid machine tool
-      requires comparing three strategies: machining alone, DED alone, or an
-      integrated hybrid route. This decision typically depends on specialized
-      process knowledge and detailed, time-intensive planning. ARMS
-      process-selection software evaluates candidate routes and helps users
-      identify a preferred manufacturing approach based on productivity,
-      material cost, and energy consumption.
-    </p>
-    <figure class="wide-figure">
-      <img
-        src="/images/process-selection.webp"
-        width="1800"
-        height="1014"
-        loading="lazy"
-        alt="ARMS process-selection software showing a component decomposed into features for machining, DED, or hybrid manufacturing analysis"
-      />
-      <figcaption>
-        Process-selection software for evaluating machining, DED, and hybrid
-        manufacturing routes.
-        <a class="figure-enlarge" href="/images/process-selection.webp">
-          Open full-size software figure ↗
-        </a>
-      </figcaption>
-    </figure>
+    <div class="project-layout">
+      <div class="project-story">
+        <h3>Problem</h3>
+        <p>
+          Choosing between machining, DED, and a combined hybrid route requires
+          evaluating competing manufacturing strategies. Detailed analysis can
+          be time-consuming and depend heavily on specialized process knowledge.
+        </p>
+        <h3>Approach</h3>
+        <p>
+          We develop software that analyzes a part’s geometry and rapidly
+          evaluates candidate manufacturing routes. By comparing process time,
+          material usage, and energy consumption before detailed CAM planning,
+          the software helps users identify a suitable strategy.
+        </p>
+        <h3>Demonstrated result</h3>
+        <p>
+          The framework enabled faster manufacturing-route evaluation and
+          decision-making, reducing the need for extensive preliminary planning.
+        </p>
+      </div>
+      <figure class="wide-figure">
+        <img
+          src="/images/process-selection.webp"
+          width="1800"
+          height="1014"
+          loading="lazy"
+          alt="ARMS process-selection software showing a component decomposed into features for machining, DED, or hybrid manufacturing analysis"
+        />
+        <figcaption>
+          Process-selection software for evaluating machining, DED, and hybrid
+          manufacturing routes.
+          <a class="figure-enlarge" href="/images/process-selection.webp">
+            Open full-size software figure ↗
+          </a>
+        </figcaption>
+      </figure>
+    </div>
+    <RelatedPublications ids={["45"]} />
   </section>
   <section class="section reading-link">
     <span class="role">Publications</span>

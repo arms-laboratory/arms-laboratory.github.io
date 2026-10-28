@@ -576,6 +576,208 @@ figure img,
   font-size: 1.65rem;
   font-weight: 500;
 }
+.alumni-introduction {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 48px;
+}
+.alumni-introduction > div {
+  width: 100%;
+}
+.alumni-introduction h2 {
+  margin-bottom: 0;
+}
+.alumni-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 64px;
+  list-style: none;
+  margin: 40px 0 0;
+  padding: 0;
+}
+.alumni-list li {
+  border-top: 1px solid var(--line);
+  padding: 22px 0 28px;
+}
+.alumni-list h2 {
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.alumni-list p {
+  margin-bottom: 4px;
+  font-size: 0.92rem;
+}
+.alumni-list .note {
+  margin-top: 10px;
+  font-size: 0.84rem;
+}
+.project-story h3 {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #3e576c;
+  margin: 24px 0 8px;
+}
+.project-story h3:first-child {
+  margin-top: 0;
+}
+.project-story p {
+  margin: 0 0 16px;
+}
+.project-story p:last-child {
+  margin-bottom: 0;
+}
+.grid-overview {
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+}
+.grid-overview > figure {
+  width: 100%;
+  max-width: 440px;
+  justify-self: end;
+}
+.project-media-grid,
+.project-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 36px;
+  align-items: start;
+  margin-top: 32px;
+}
+.project-media-grid > *,
+.project-layout > * {
+  min-width: 0;
+}
+.project-media-grid .wide-figure,
+.project-layout .wide-figure {
+  margin-top: 0;
+}
+.project-media-grid .diagram-scroll img {
+  min-width: 0;
+  max-width: 100%;
+}
+.section.soft > .ded-story {
+  max-width: 900px;
+  margin-left: 0;
+}
+.ded-story p {
+  max-width: none;
+}
+.video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--ink);
+}
+.video-frame img,
+.video-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.video-frame img {
+  object-fit: cover;
+}
+.video-load {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  border: 0;
+  background: rgb(10 25 40 / 35%);
+  color: #fff;
+}
+.video-play {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 1px solid rgb(255 255 255 / 75%);
+  border-radius: 50%;
+  background: var(--ink);
+}
+.video-load > span:last-child {
+  padding: 5px 12px;
+  background: var(--ink);
+  font-size: 0.82rem;
+}
+.video-load:hover .video-play {
+  background: #294962;
+}
+.video-title,
+.video-description {
+  display: block;
+}
+.video-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.video-description {
+  margin-bottom: 8px;
+}
+.research-video figcaption a {
+  display: inline-block;
+  padding: 4px 0;
+}
+.more-demonstrations {
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.more-demonstrations summary {
+  cursor: pointer;
+  padding: 18px 0;
+  font-size: 0.9rem;
+  color: #244c77;
+}
+summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 36px;
+  padding: 8px 0 28px;
+}
+.project-papers {
+  margin-top: 32px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.project-papers h3 {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #3e576c;
+  margin-bottom: 14px;
+}
+.project-papers ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 900px;
+}
+.project-papers li {
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+}
+.project-papers li:last-child {
+  margin-bottom: 0;
+}
+.project-papers li span {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
 .student-intro {
   background: var(--paper);
 }
@@ -972,6 +1174,28 @@ figure img,
   .people-grid {
     grid-template-columns: 1fr;
     gap: 14px;
+  }
+  .alumni-introduction,
+  .alumni-list,
+  .project-media-grid,
+  .project-layout,
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+  .alumni-introduction {
+    gap: 20px;
+  }
+  .grid-overview > figure {
+    justify-self: start;
+  }
+  .project-media-grid,
+  .project-layout,
+  .video-grid {
+    gap: 28px;
+  }
+  .project-media-grid .diagram-scroll img {
+    min-width: 800px;
+    max-width: none;
   }
 }
 @media (max-width: 480px) {

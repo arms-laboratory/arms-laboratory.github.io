@@ -18,7 +18,7 @@ const years = [...new Set(records.map((r) => r.year))];
 
 <Base
   title="Publications"
-  description="Browse 44 ARMS Laboratory publications by year, search term, and research topic."
+  description={`Browse ${records.length} ARMS Laboratory publications by year, search term, and research topic.`}
   current="/publications/"
 >
   <section class="section publications">
@@ -95,7 +95,7 @@ const years = [...new Set(records.map((r) => r.year))];
       aria-controls="pub-list"
       hidden
     >
-      View all 44 publications
+      View all {records.length} publications
     </button>
   </section>
 </Base>

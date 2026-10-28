@@ -1,0 +1,22 @@
+---
+import publications from "../data/publications.json";
+interface Props {
+  ids: string[];
+}
+const { ids } = Astro.props;
+const papers = publications.filter((paper) => ids.includes(paper.id));
+---
+
+<div class="project-papers">
+  <h3>{papers.length === 1 ? "Related paper" : "Related papers"}</h3>
+  <ul>
+    {papers.map((paper) => (
+      <li>
+        <a href={paper.url ?? "/publications/"}>{paper.title} ↗</a>
+        <span>
+          {paper.venue} · {paper.year}
+        </span>
+      </li>
+    ))}
+  </ul>
+</div>

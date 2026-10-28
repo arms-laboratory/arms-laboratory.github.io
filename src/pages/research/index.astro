@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import ResearchCards from "../../components/ResearchCards.astro";
+import publications from "../../data/publications.json";
 ---
 
 <Base
@@ -26,6 +27,8 @@ import ResearchCards from "../../components/ResearchCards.astro";
   </section>
   <section class="section reading-link">
     <span class="role">Publications</span>
-    <a href="/publications/">Browse all 44 ARMS publications →</a>
+    <a href="/publications/">
+      Browse all {publications.length} ARMS publications →
+    </a>
   </section>
 </Base>

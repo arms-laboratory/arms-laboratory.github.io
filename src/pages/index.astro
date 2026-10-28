@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import ResearchCards from "../components/ResearchCards.astro";
+import publications from "../data/publications.json";
 ---
 
 <Base
@@ -71,8 +72,8 @@ import ResearchCards from "../components/ResearchCards.astro";
   </section>
   <div class="section home-reading">
     <p>
-      <span class="reading-number">44</span> publications in manufacturing
-      research
+      <span class="reading-number">{publications.length}</span> publications in
+      manufacturing research
     </p>
     <a class="text-link" href="/publications/">
       Explore the bibliography <span aria-hidden="true">↗</span>

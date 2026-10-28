@@ -1,5 +1,29 @@
 [
   {
+    "id": "45",
+    "year": 2026,
+    "authors": "Ahmed, K. O.; Zhang, W.; Soshi, M.",
+    "title": "Manufacturability-Driven Analytical Framework for Additive-Subtractive Hybrid Manufacturing Process Planning",
+    "venue": "The International Journal of Advanced Manufacturing Technology",
+    "doi": "10.1007/s00170-026-19208-w",
+    "topics": ["hybrid", "planning"],
+    "source": "https://link.springer.com/article/10.1007/s00170-026-19208-w",
+    "predates_lab": false,
+    "url": "https://doi.org/10.1007/s00170-026-19208-w"
+  },
+  {
+    "id": "46",
+    "year": 2025,
+    "authors": "Zhang, W.; Yang, M.; Li, G.; Soshi, M.",
+    "title": "Productive Energy Fluence (PEF) controller using feed and laser hybrid control for Directed Energy Deposition (DED)",
+    "venue": "Journal of Manufacturing Processes, 142, 1–17",
+    "doi": "10.1016/j.jmapro.2025.03.047",
+    "topics": ["additive", "control"],
+    "source": "https://www.sciencedirect.com/science/article/pii/S1526612525002993",
+    "predates_lab": false,
+    "url": "https://doi.org/10.1016/j.jmapro.2025.03.047"
+  },
+  {
     "id": "1",
     "year": 2025,
     "authors": "Baumann, C.; Yerranagu, M.; Zhang, W.; Deshpande, A.; Maier, S.; Gössinger, S.; Soshi, M.; Bleicher, F.; Pfefferkorn, F. E.",
