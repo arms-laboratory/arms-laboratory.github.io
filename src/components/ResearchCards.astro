@@ -4,12 +4,14 @@ import AgentDiagram from "./AgentDiagram.astro";
 
 <div class="research-grid">
   <article>
+    <header class="research-heading">
+      <p class="research-index">01 / Software &amp; systems</p>
+      <h3>Agentic Manufacturing</h3>
+    </header>
     <div class="research-media">
       <AgentDiagram compact />
     </div>
     <div class="research-copy">
-      <p class="research-index">01 / Software &amp; systems</p>
-      <h3>Agentic Manufacturing</h3>
       <p>
         Investigating software agents that operate and coordinate CAD, CAM, and
         CNC systems to reduce reliance on manual operator interaction.
@@ -20,11 +22,15 @@ import AgentDiagram from "./AgentDiagram.astro";
     </div>
   </article>
   <article>
+    <header class="research-heading">
+      <p class="research-index">02 / Processes &amp; machines</p>
+      <h3>Machining/DED hybrid manufacturing</h3>
+    </header>
     <div class="research-media">
       <img
         src="/images/home-hybrid.webp"
         srcset="/images/home-hybrid-720.webp 720w, /images/home-hybrid.webp 1620w"
-        sizes="(max-width: 620px) calc(100vw - 44px), 46vw"
+        sizes="(max-width: 900px) calc(100vw - 48px), (min-width: 1336px) 624px, calc((100vw - 88px) / 2)"
         width="1620"
         height="1365"
         loading="lazy"
@@ -32,8 +38,6 @@ import AgentDiagram from "./AgentDiagram.astro";
       />
     </div>
     <div class="research-copy">
-      <p class="research-index">02 / Processes &amp; machines</p>
-      <h3>Machining/DED hybrid manufacturing</h3>
       <p>
         Investigating how deposition and machining can work together, from
         process planning to experimental measurement.

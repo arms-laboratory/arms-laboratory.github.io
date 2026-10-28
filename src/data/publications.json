@@ -62,14 +62,14 @@
   {
     "id": "4",
     "year": 2025,
-    "authors": "Lafrenza, M.; Zhang, W.; Soshi, M.",
+    "authors": "Lafirenza, M.; Zhang, W.; Soshi, M.",
     "title": "Development of a cost-effective dual-camera real-time monitoring system for clad height control in 3D direct energy deposition processes",
-    "venue": "NAMRC 53",
-    "doi": "",
+    "venue": "Manufacturing Letters, 44, Supplement, 904–914",
+    "doi": "10.1016/j.mfglet.2025.06.107",
     "topics": ["additive", "control"],
-    "source": "https://arms.engr.ucdavis.edu/publications/",
+    "source": "https://www.sciencedirect.com/science/article/pii/S2213846325001397",
     "predates_lab": false,
-    "url": null
+    "url": "https://doi.org/10.1016/j.mfglet.2025.06.107"
   },
   {
     "id": "5",

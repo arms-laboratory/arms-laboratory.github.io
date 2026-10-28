@@ -50,6 +50,8 @@ for (const route of routes) {
     if (
       process.env.ARMS_REVIEW_DIR &&
       [
+        "/",
+        "/research/",
         "/members/",
         "/members/alumni/",
         "/research/hybrid-manufacturing/",
@@ -66,7 +68,7 @@ for (const route of routes) {
       await page.screenshot({
         path: join(
           process.env.ARMS_REVIEW_DIR,
-          `update-${route.split("/").filter(Boolean).join("-")}-${test.info().project.name}.png`,
+          `update-${route.split("/").filter(Boolean).join("-") || "home"}-${test.info().project.name}.png`,
         ),
         fullPage: true,
       });
@@ -100,8 +102,8 @@ test("homepage research cards align and images load", async ({
             .getBoundingClientRect().top,
         })),
       );
-    expect(boxes[0].height).toBe(350);
-    expect(boxes[1].height).toBe(350);
+    expect(boxes[0].height).toBeGreaterThanOrEqual(350);
+    expect(Math.abs(boxes[0].height - boxes[1].height)).toBeLessThan(1);
     expect(Math.abs(boxes[0].heading - boxes[1].heading)).toBeLessThan(1);
     expect(Math.abs(boxes[0].copy - boxes[1].copy)).toBeLessThan(1);
   }
@@ -115,6 +117,68 @@ test("homepage research cards align and images load", async ({
       ),
       fullPage: testInfo.project.name === "phone",
     });
+  }
+});
+
+test("research titles precede uncropped visuals across screen sizes", async ({
+  page,
+}, testInfo) => {
+  const widths =
+    testInfo.project.name === "desktop"
+      ? [768, 900, 1024, 1280, 1440, 1920]
+      : [360, 390, 600];
+  for (const route of ["/", "/research/"]) {
+    await page.goto(route);
+    for (const width of widths) {
+      await page.setViewportSize({ width, height: 1000 });
+      const cards = await page
+        .locator(".research-grid article")
+        .evaluateAll((elements) =>
+          elements.map((card) => {
+            const rect = (selector: string) =>
+              card.querySelector(selector)!.getBoundingClientRect();
+            const title = rect("h3");
+            const media = rect(".research-media");
+            const copy = rect(".research-copy");
+            return {
+              titleTop: title.top,
+              titleBottom: title.bottom,
+              mediaTop: media.top,
+              mediaBottom: media.bottom,
+              copyTop: copy.top,
+            };
+          }),
+        );
+      for (const card of cards) {
+        expect(card.titleBottom).toBeLessThanOrEqual(card.mediaTop);
+        expect(card.mediaBottom).toBeLessThanOrEqual(card.copyTop);
+      }
+      if (width > 900) {
+        expect(Math.abs(cards[0].titleTop - cards[1].titleTop)).toBeLessThan(1);
+        expect(Math.abs(cards[0].mediaTop - cards[1].mediaTop)).toBeLessThan(1);
+        expect(Math.abs(cards[0].copyTop - cards[1].copyTop)).toBeLessThan(1);
+      }
+      expect(
+        await page
+          .locator(".research-media > img")
+          .evaluate((el) => getComputedStyle(el).objectFit),
+      ).toBe("contain");
+      expect(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth,
+        ),
+      ).toBe(true);
+      if (route === "/") {
+        const intro = await page
+          .locator(".lab-introduction")
+          .evaluate((el) => ({
+            headingBottom: el.querySelector("h2")!.getBoundingClientRect()
+              .bottom,
+            copyTop: el.querySelector("div + div")!.getBoundingClientRect().top,
+          }));
+        expect(intro.copyTop).toBeGreaterThan(intro.headingBottom);
+      }
+    }
   }
 });
 
@@ -154,6 +218,15 @@ test("publications expand, filter, search, and report no results", async ({
   );
   await page.locator("#pub-search").fill("grid molding");
   await expect(visible).toHaveCount(1);
+  await page.locator("#pub-search").fill("dual-camera");
+  await expect(visible).toHaveCount(1);
+  await expect(visible).toContainText("Lafirenza, M.");
+  await expect(visible).toContainText(
+    "Manufacturing Letters, 44, Supplement, 904–914",
+  );
+  await expect(
+    visible.getByRole("link", { name: "View article" }),
+  ).toHaveAttribute("href", "https://doi.org/10.1016/j.mfglet.2025.06.107");
   await page.locator("#pub-search").fill("no-matching-publication-xyz");
   await expect(visible).toHaveCount(0);
   await expect(page.locator("#pub-empty")).toBeVisible();
@@ -167,10 +240,10 @@ test("hybrid research balances figures and video on desktop and phone", async ({
   const result = await page.locator("#grid-molding").evaluate((section) => {
     const heading = section.querySelector("h2")!.getBoundingClientRect();
     const copy = section
-      .querySelector(".grid-overview .project-story")!
+      .querySelector(".project-layout .project-story")!
       .getBoundingClientRect();
     const photo = section
-      .querySelector(".grid-overview figure")!
+      .querySelector(".project-layout figure")!
       .getBoundingClientRect();
     const process = section
       .querySelector(".diagram-scroll")!
@@ -199,7 +272,6 @@ test("hybrid research balances figures and video on desktop and phone", async ({
   if (testInfo.project.name === "desktop") {
     expect(result.photoX).toBeGreaterThan(result.copyX);
     expect(Math.abs(result.copyY - result.photoY)).toBeLessThan(1);
-    expect(result.processWidth).toBeGreaterThan(result.photoWidth);
     expect(result.videoX).toBeGreaterThan(result.processX);
     expect(Math.abs(result.videoY - result.processY)).toBeLessThan(1);
   } else {
@@ -208,12 +280,91 @@ test("hybrid research balances figures and video on desktop and phone", async ({
     await page.locator(".diagram-scroll").focus();
     await expect(page.locator(".diagram-scroll")).toBeFocused();
   }
+  for (const id of ["grid-molding", "ded-control", "process-planning"]) {
+    const positions = await page.locator(`#${id}`).evaluate((section) => {
+      const copy = section
+        .querySelector(".project-layout .project-story")!
+        .getBoundingClientRect();
+      const figure = section
+        .querySelector(".project-layout figure")!
+        .getBoundingClientRect();
+      const layout = section
+        .querySelector(".project-layout")!
+        .getBoundingClientRect();
+      const video = section
+        .querySelector(".research-video")
+        ?.getBoundingClientRect();
+      return {
+        copyX: copy.left,
+        copyY: copy.top,
+        copyBottom: copy.bottom,
+        figureX: figure.left,
+        figureY: figure.top,
+        layoutBottom: layout.bottom,
+        videoY: video?.top,
+      };
+    });
+    if (testInfo.project.name === "desktop") {
+      expect(positions.figureX).toBeGreaterThan(positions.copyX);
+      expect(Math.abs(positions.figureY - positions.copyY)).toBeLessThan(1);
+    } else {
+      expect(positions.figureY).toBeGreaterThan(positions.copyBottom);
+    }
+    if (positions.videoY !== undefined && id !== "ded-control")
+      expect(positions.videoY).toBeGreaterThan(positions.layoutBottom);
+  }
+  for (const width of testInfo.project.name === "desktop"
+    ? [1024, 1280, 1440, 1920]
+    : [360, 390, 760]) {
+    await page.setViewportSize({ width, height: 1000 });
+    const ded = await page.locator("#ded-control").evaluate((section) => {
+      const rect = (selector: string) =>
+        section.querySelector(selector)!.getBoundingClientRect();
+      const copy = rect(".project-story");
+      const diagram = rect(".wide-figure");
+      const video = rect(".research-video");
+      return {
+        copyX: copy.left,
+        copyBottom: copy.bottom,
+        diagramX: diagram.left,
+        diagramBottom: diagram.bottom,
+        diagramWidth: diagram.width,
+        videoX: video.left,
+        videoY: video.top,
+        videoWidth: video.width,
+      };
+    });
+    expect(Math.abs(ded.diagramX - ded.videoX)).toBeLessThan(1);
+    expect(Math.abs(ded.diagramWidth - ded.videoWidth)).toBeLessThan(1);
+    expect(ded.videoY - ded.diagramBottom).toBeGreaterThanOrEqual(23);
+    expect(ded.videoY - ded.diagramBottom).toBeLessThanOrEqual(25);
+    if (testInfo.project.name === "desktop") {
+      expect(ded.videoX).toBeGreaterThan(ded.copyX);
+      expect(ded.videoY).toBeLessThan(ded.copyBottom);
+    } else {
+      expect(ded.videoY).toBeGreaterThan(ded.copyBottom);
+    }
+  }
+  await page.setViewportSize({
+    width: testInfo.project.name === "desktop" ? 1440 : 390,
+    height: 1000,
+  });
   await page.locator(".more-demonstrations summary").click();
   for (const image of await page.locator("main img").all()) {
     await image.scrollIntoViewIfNeeded();
     await expect
       .poll(() => image.evaluate((el: HTMLImageElement) => el.naturalWidth))
       .toBeGreaterThan(0);
+  }
+  if (process.env.ARMS_REVIEW_DIR) {
+    await page.locator(".more-demonstrations summary").click();
+    await mkdir(process.env.ARMS_REVIEW_DIR, { recursive: true });
+    await page.locator("#ded-control").screenshot({
+      path: join(
+        process.env.ARMS_REVIEW_DIR,
+        `ded-control-${testInfo.project.name}.png`,
+      ),
+    });
   }
 });
 
