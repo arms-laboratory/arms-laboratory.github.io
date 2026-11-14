@@ -8,31 +8,38 @@ import CognitiveDiagram from "../../components/CognitiveDiagram.astro";
   description="ARMS explores Cognitive Manufacturing to rethink manufacturing workflows for people and computers, connecting engineering knowledge and computational tools from design to inspection."
   current="/research/cognitive-manufacturing/"
 >
-  <section class="section detail-intro">
+  <section class="section detail-intro cognitive-hero">
     <p class="eyebrow">Research / Cognitive Manufacturing</p>
     <h1>Rethinking the manufacturing workflow.</h1>
     <p class="lead">
-      How can we accelerate manufacturing with engineering information that
-      people can understand and computers can use?
+      Engineering information that people can understand and computers can use,
+      helping move ideas into production.
     </p>
-    <p>
-      Traditional manufacturing workflows rely on 2D working drawings and the
-      expertise of people who interpret them. Engineering intent is repeatedly
-      translated into decisions for design, process planning, production, and
-      inspection. These handoffs can take time and make information difficult to
-      carry consistently from one activity to the next.
-    </p>
-    <p>
-      At ARMS, we are exploring Cognitive Manufacturing to rethink this
-      workflow. Our vision is a shared engineering definition that serves both
-      people and computers: clear views and explanations for engineers,
-      connected information that software can interpret and use. By bringing
-      engineering knowledge and computational tools together, we aim to reduce
-      repeated interpretation, accelerate the path from design to production,
-      and help people make informed decisions throughout the manufacturing
-      lifecycle.
-    </p>
-    <CognitiveDiagram />
+    <CognitiveDiagram compact />
+  </section>
+  <section class="section">
+    <div class="split">
+      <div>
+        <h2>The workflow today.</h2>
+        <p>
+          Traditional manufacturing relies on 2D working drawings and the
+          expertise of people who interpret them. Engineering intent is
+          repeatedly translated into decisions for planning, production, and
+          inspection. These handoffs take time and can leave important
+          information disconnected.
+        </p>
+      </div>
+      <div>
+        <h2>A shared engineering definition.</h2>
+        <p>
+          At ARMS, we are exploring engineering information for both people and
+          computers: clear views and explanations for engineers, connected
+          information that software can interpret and use. Our aim is to reduce
+          repeated interpretation and accelerate the path from design to
+          production, with people guiding engineering decisions.
+        </p>
+      </div>
+    </div>
   </section>
   <section class="section soft">
     <p class="eyebrow">Two complementary research pillars</p>
@@ -86,8 +93,56 @@ import CognitiveDiagram from "../../components/CognitiveDiagram.astro";
 </Base>
 
 <style>
-  .detail-intro > :global(.cognitive-diagram) {
-    margin-top: 36px;
+  .cognitive-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 64px;
+    align-items: center;
+  }
+  .cognitive-hero > .eyebrow {
+    grid-column: 1;
+    align-self: end;
+  }
+  .cognitive-hero h1 {
+    grid-column: 1;
+    font-size: clamp(2.7rem, 4.3vw, 4.1rem);
+  }
+  .cognitive-hero .lead {
+    grid-column: 1;
+    margin-bottom: 0;
+  }
+  .cognitive-hero > :global(.cognitive-diagram) {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    width: 100%;
     max-width: 100%;
+    height: auto;
+    min-height: 400px;
+  }
+  @media (max-width: 1000px) {
+    .cognitive-hero {
+      gap: 0 30px;
+    }
+    .cognitive-hero h1 {
+      font-size: 2.8rem;
+    }
+    .cognitive-hero .lead {
+      font-size: 1rem;
+    }
+  }
+  @media (max-width: 760px) {
+    .cognitive-hero {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .cognitive-hero h1 {
+      font-size: clamp(2.6rem, 7vw, 3.6rem);
+    }
+    .cognitive-hero > :global(.cognitive-diagram) {
+      grid-column: 1;
+      grid-row: auto;
+      margin-top: 28px;
+      min-height: 0;
+    }
   }
 </style>
