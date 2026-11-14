@@ -6,7 +6,7 @@ import { join } from "node:path";
 const routes = [
   "/",
   "/research/",
-  "/research/agentic-manufacturing/",
+  "/research/cognitive-manufacturing/",
   "/research/hybrid-manufacturing/",
   "/about/",
   "/members/",
@@ -54,6 +54,7 @@ for (const route of routes) {
         "/research/",
         "/members/",
         "/members/alumni/",
+        "/research/cognitive-manufacturing/",
         "/research/hybrid-manufacturing/",
       ].includes(route)
     ) {
@@ -489,4 +490,12 @@ test("search engine files use the university domain", async ({ request }) => {
   expect(xml.match(/<loc>https:\/\/arms\.engr\.ucdavis\.edu\//g)?.length).toBe(
     10,
   );
+});
+
+test("legacy agentic address points to cognitive research", async ({
+  request,
+}) => {
+  const response = await request.get("/research/agentic-manufacturing/");
+  expect(response.status()).toBe(200);
+  expect(await response.text()).toContain("/research/cognitive-manufacturing/");
 });

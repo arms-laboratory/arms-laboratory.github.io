@@ -1,0 +1,229 @@
+---
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<figure class:list={["cognitive-diagram", { compact: compact }]}>
+  <div class="vision">
+    <strong>Cognitive Manufacturing</strong>
+    <span>Intelligence across the manufacturing lifecycle</span>
+  </div>
+  <div class="pillars">
+    <div class="pillar">
+      <strong>Semantic Manufacturing</strong>
+      <p>Connect engineering meaning and knowledge.</p>
+    </div>
+    <span class="exchange" aria-hidden="true">
+      ↔
+    </span>
+    <div class="pillar">
+      <strong>Agentic Manufacturing</strong>
+      <p>Reason, act, and verify with engineering tools.</p>
+    </div>
+  </div>
+  <div class="lifecycle" aria-label="Manufacturing lifecycle">
+    <span>Design</span>
+    <span>Planning</span>
+    <span>Production</span>
+    <span>Inspection</span>
+    <span>Improvement</span>
+  </div>
+  <figcaption>
+    Two complementary pillars, with people guiding decisions.
+  </figcaption>
+</figure>
+<style>
+  .cognitive-diagram {
+    background: #18374f;
+    color: #fff;
+    padding: 44px clamp(24px, 5vw, 72px) 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .vision {
+    text-align: center;
+  }
+  .vision > strong {
+    display: block;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  .vision span {
+    display: block;
+    color: #dae5ed;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-top: 12px;
+    text-wrap: balance;
+  }
+  .pillars {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr);
+    align-items: center;
+    width: 100%;
+    max-width: 960px;
+    margin-top: 38px;
+  }
+  .pillar {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid #637f94;
+    border-top: 3px solid #ed8b69;
+    background: #25465e;
+    padding: 28px 24px;
+    min-width: 0;
+  }
+  .pillar strong {
+    display: block;
+    font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+    line-height: 1.3;
+    font-weight: 500;
+    text-wrap: balance;
+  }
+  .pillar p {
+    color: #e1eaf0;
+    font-size: 1rem;
+    line-height: 1.5;
+    max-width: 30ch;
+    margin: 12px auto 0;
+    text-wrap: balance;
+  }
+  .exchange {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #edaa91;
+  }
+  .lifecycle {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    width: 100%;
+    max-width: 960px;
+    margin-top: 30px;
+    border-top: 1px solid #637f94;
+    border-bottom: 1px solid #637f94;
+    padding: 16px 0;
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .lifecycle span + span {
+    border-left: 1px solid #637f94;
+  }
+  figcaption {
+    text-align: center;
+    color: #dae5ed;
+    padding-top: 18px;
+    font-size: 0.8rem;
+  }
+  .compact {
+    height: 100%;
+    padding: 26px 24px 22px;
+    justify-content: center;
+  }
+  .compact .vision > strong {
+    font-size: 1.75rem;
+  }
+  .compact .vision span {
+    font-size: 0.85rem;
+    margin-top: 8px;
+  }
+  .compact .pillars {
+    margin-top: 24px;
+    grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr);
+  }
+  .compact .pillar {
+    padding: 20px 12px;
+  }
+  .compact .pillar strong {
+    font-size: 1.1rem;
+  }
+  .compact .pillar p {
+    font-size: 0.8rem;
+    margin-top: 10px;
+  }
+  .compact .lifecycle {
+    font-size: 0.7rem;
+    margin-top: 22px;
+    padding: 12px 0;
+  }
+  .compact figcaption {
+    font-size: 0.7rem;
+    padding-top: 14px;
+  }
+  @media (max-width: 1100px) and (min-width: 901px) {
+    .compact {
+      padding: 20px 16px;
+    }
+    .compact .pillar {
+      padding: 16px 10px;
+    }
+    .compact .pillar strong {
+      font-size: 1rem;
+    }
+    .compact .vision > strong {
+      font-size: 1.5rem;
+    }
+  }
+  @media (max-width: 900px) {
+    .compact {
+      height: auto;
+      min-height: 350px;
+    }
+  }
+  @media (max-width: 540px) {
+    .cognitive-diagram {
+      padding: 30px 20px 24px;
+    }
+    .pillars,
+    .compact .pillars {
+      grid-template-columns: 1fr;
+      margin-top: 28px;
+    }
+    .exchange {
+      transform: rotate(90deg);
+      line-height: 1;
+      padding: 8px 0;
+    }
+    .pillar,
+    .compact .pillar {
+      padding: 22px 18px;
+    }
+    .pillar strong,
+    .compact .pillar strong {
+      font-size: 1.2rem;
+    }
+    .pillar p,
+    .compact .pillar p {
+      font-size: 0.9rem;
+    }
+    .lifecycle,
+    .compact .lifecycle {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 0;
+      font-size: 0.8rem;
+      padding: 14px 0;
+    }
+    .lifecycle span {
+      padding: 0 10px;
+    }
+    .lifecycle span + span {
+      border: 0;
+    }
+    figcaption,
+    .compact figcaption {
+      font-size: 0.75rem;
+      max-width: 32ch;
+    }
+  }
+</style>

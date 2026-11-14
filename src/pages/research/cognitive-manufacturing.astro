@@ -1,0 +1,93 @@
+---
+import Base from "../../layouts/Base.astro";
+import CognitiveDiagram from "../../components/CognitiveDiagram.astro";
+---
+
+<Base
+  title="Cognitive Manufacturing"
+  description="ARMS explores Cognitive Manufacturing to rethink manufacturing workflows for people and computers, connecting engineering knowledge and computational tools from design to inspection."
+  current="/research/cognitive-manufacturing/"
+>
+  <section class="section detail-intro">
+    <p class="eyebrow">Research / Cognitive Manufacturing</p>
+    <h1>Rethinking the manufacturing workflow.</h1>
+    <p class="lead">
+      How can we accelerate manufacturing with engineering information that
+      people can understand and computers can use?
+    </p>
+    <p>
+      Traditional manufacturing workflows rely on 2D working drawings and the
+      expertise of people who interpret them. Engineering intent is repeatedly
+      translated into decisions for design, process planning, production, and
+      inspection. These handoffs can take time and make information difficult to
+      carry consistently from one activity to the next.
+    </p>
+    <p>
+      At ARMS, we are exploring Cognitive Manufacturing to rethink this
+      workflow. Our vision is a shared engineering definition that serves both
+      people and computers: clear views and explanations for engineers,
+      connected information that software can interpret and use. By bringing
+      engineering knowledge and computational tools together, we aim to reduce
+      repeated interpretation, accelerate the path from design to production,
+      and help people make informed decisions throughout the manufacturing
+      lifecycle.
+    </p>
+    <CognitiveDiagram />
+  </section>
+  <section class="section soft">
+    <p class="eyebrow">Two complementary research pillars</p>
+    <h2>Engineering meaning. Intelligent collaboration.</h2>
+    <div class="split">
+      <div>
+        <h3>Semantic Manufacturing</h3>
+        <p>
+          How can we make engineering information meaningful and usable across
+          tools and activities? We explore ways to connect design intent,
+          requirements, and manufacturing knowledge, with human-readable views
+          and computer-processable information grounded in the same engineering
+          definition.
+        </p>
+      </div>
+      <div>
+        <h3>Agentic Manufacturing</h3>
+        <p>
+          How can software agents help with engineering work? We explore how
+          agents can reason, use engineering tools, and collaborate with people
+          to move work forward, from interpreting a task to proposing actions
+          and checking outcomes.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="section closing">
+    <p class="eyebrow">An emerging research direction</p>
+    <h2>Explore the future of manufacturing with us.</h2>
+    <p>
+      This emerging research direction offers opportunities to connect
+      mechanical engineering with software development, CAD/CAM, and
+      experimental manufacturing. Potential projects include representing
+      engineering knowledge, developing software agents for engineering, and
+      connecting design with manufacturing and inspection.
+    </p>
+    <p>
+      We welcome curious students who enjoy building, experimenting, and working
+      across disciplines, as well as collaborators with manufacturing challenges
+      to explore.
+    </p>
+    <div class="actions">
+      <a class="button primary" href="/open-positions/">
+        Student inquiry information →
+      </a>
+      <a class="button secondary" href="mailto:msoshi@ucdavis.edu">
+        Discuss collaboration
+      </a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .detail-intro > :global(.cognitive-diagram) {
+    margin-top: 36px;
+    max-width: 100%;
+  }
+</style>
