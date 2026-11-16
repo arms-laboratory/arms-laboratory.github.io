@@ -3,6 +3,7 @@ import "../styles/global.css";
 import "../styles/refined.css";
 const { title, description, current = "" } = Astro.props;
 const nav = [
+  ["/", "Home"],
   ["/research/", "Research"],
   ["/members/", "People"],
   ["/about/", "About"],
@@ -96,7 +97,20 @@ const nav = [
         <a href="/open-positions/">Student research</a>
         <a href="/visit/">Contact &amp; Visit</a>
         <a href="mailto:msoshi@ucdavis.edu">msoshi@ucdavis.edu</a>
-        <a href="https://www.ucdavis.edu/">UC Davis ↗</a>
+        <a
+          href="https://www.ucdavis.edu/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          UC Davis ↗
+        </a>
+        <a
+          href="https://mae.ucdavis.edu/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          UC Davis MAE ↗
+        </a>
       </div>
     </footer>
     <script>
