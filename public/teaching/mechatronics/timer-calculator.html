@@ -1,0 +1,74 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EME154 · Timer Calculator</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="timer-calculator.css?v=2"><link rel="stylesheet" href="course.css?v=arms-2"><link rel="stylesheet" href="../assets/arms-header.css?v=arms-1" data-arms-header>
+<script src="../assets/arms-header.js?v=arms-1" defer data-arms-header></script>
+<meta name="description" content="Interactive EME154 mechatronics teaching models from the ARMS Laboratory at UC Davis.">
+<link rel="canonical" href="https://arms.engr.ucdavis.edu/teaching/mechatronics/timer-calculator.html">
+<link rel="icon" href="/favicon.png" type="image/png">
+</head><body><!-- ARMS HEADER START -->
+<a class="arms-skip-link" href="#teaching-content">Skip to content</a>
+<div class="arms-masthead">
+  <div class="arms-affiliation">
+    <span>University of California, Davis</span>
+    <span>Mechanical and Aerospace Engineering</span>
+  </div>
+  <header class="arms-site-header">
+    <a
+      class="arms-brand"
+      href="https://arms.engr.ucdavis.edu/"
+      aria-label="ARMS Laboratory home"
+    >
+      <img
+        src="../assets/arms-logo.svg"
+        alt="ARMS Laboratory"
+        width="1500"
+        height="806"
+      />
+    </a>
+    <button
+      class="arms-menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="arms-main-nav"
+      hidden
+    >
+      Menu <span aria-hidden="true">+</span>
+    </button>
+    <nav id="arms-main-nav" class="arms-main-nav" aria-label="Main navigation">
+      <a href="https://arms.engr.ucdavis.edu/">Home</a>
+      <a href="https://arms.engr.ucdavis.edu/research/">Research</a>
+      <a href="https://arms.engr.ucdavis.edu/members/">People</a>
+      <a href="https://arms.engr.ucdavis.edu/about/">About</a>
+      <a href="https://arms.engr.ucdavis.edu/publications/">Publications</a>
+      <a href="/teaching/" aria-current="location">Teaching</a>
+      <a href="https://arms.engr.ucdavis.edu/visit/">Contact &amp; Visit</a>
+      <a
+        class="arms-nav-join"
+        href="https://arms.engr.ucdavis.edu/open-positions/"
+        >Join ARMS</a
+      >
+    </nav>
+  </header>
+</div>
+<!-- ARMS HEADER END -->
+
+<main class="shell" id="teaching-content" tabindex="-1"><nav class="arms-course-trail" aria-label="Course navigation"><a href="/teaching/">Teaching</a><span aria-hidden="true">/</span><a href="simulators.html">All simulators</a><span aria-hidden="true">/</span><span aria-current="page">Timer Calculator</span></nav>
+<header><div><div class="eyebrow">EME154 · Calculator</div><h1>From timing to working code.</h1><p>Configure a CTC timer interrupt. Understand the numbers. Take the code to your board.</p></div><nav class="related-links" aria-label="Related labs"><a href="timer.html">Timer lab</a><a href="interrupt.html">Interrupt lab</a></nav></header>
+<div class="compatibility">Arduino Uno R3 / classic Nano · ATmega328P · 8- and 16-bit timers <span>Not for Uno R4, Nano Every, or other MCU families</span></div>
+<div class="calculator-layout"><section class="calculator-input"><div class="section-kicker">01 / Configure</div><h2>What timing do you need?</h2><form id="calculator-form">
+<label>Timer<select id="calc-timer"><option value="1">Timer1 · 16 bit · recommended</option><option value="0">Timer0 · 8 bit</option><option value="2">Timer2 · 8 bit</option></select></label>
+<label>CPU clock (Hz)<input id="calc-clock" type="number" min="1000" max="20000000" step="1" value="16000000" required></label>
+<div class="input-pair"><label>Target value<input id="calc-target" type="number" min="0" step="any" value="1" required></label><label>Unit<select id="calc-unit"><option value="s">seconds</option><option value="ms">milliseconds</option><option value="us">microseconds</option><option value="hz">Hz</option></select></label></div>
+<div class="quick-targets"><button type="button" data-seconds="1">1 second</button><button type="button" data-seconds="0.5">0.5 seconds</button><button type="button" data-seconds="0.001">1 kHz</button></div>
+<label>Prescaler<select id="calc-prescaler"><option value="auto">Auto · smallest frequency error</option></select></label>
+<label class="software-option"><input id="calc-software" type="checkbox"> Allow a software counter in the ISR</label><p class="hint">For intervals longer than one hardware timer cycle, count multiple compare interrupts before running the task.</p><p class="hint">Auto compares every valid prescaler. Ties use the smallest prescaler for hardware-only timing. With software counting enabled, ties favor fewer interrupts to reduce CPU work.</p><p class="hint">Results and code update as you edit. This calculator uses CTC mode with OCRnA as TOP.</p>
+</form><div id="timer-conflict" class="notice"></div><p class="hint">The clock must match the board's actual clock. Changing this input does not change the hardware.</p></section>
+<section class="calculator-results"><div class="result-heading"><div><div class="section-kicker">02 / Inspect</div><h2>Your timer configuration</h2></div><span id="accuracy" class="accuracy"></span></div><p id="calc-error" class="error" role="alert"></p>
+<div id="overflow-advice" class="notice" hidden><h3>The requested count exceeds this timer’s capacity</h3><p id="overflow-explanation"></p><div class="buttons"><button id="use-timer1">Use 16-bit Timer1</button><button id="use-software">Generate with an ISR counter</button></div></div>
+<div id="valid-result"><div class="result-hero"><div><span>Achievable task interval</span><strong id="actual-period"></strong><small id="actual-frequency"></small></div><div><span id="ocr-label"></span><strong id="ocr-value"></strong><small id="ocr-hex"></small></div></div>
+<div class="calc-metrics"><div><span>Prescaler</span><strong id="actual-divider"></strong></div><div><span>Frequency error</span><strong id="actual-error"></strong></div><div><span>Timer tick</span><strong id="actual-tick"></strong></div></div>
+<p id="software-detail" class="notice" hidden></p><p id="calc-equation" class="equation-box"></p><p id="capacity-note" class="notice" hidden></p><a id="try-simulator" class="simulator-link">Explore this setting in the simulator →</a></div>
+<details open class="prescaler-details"><summary>Compare prescalers</summary><div class="table-scroll"><table><thead><tr><th>Divider</th><th>OCRnA</th><th>ISR count</th><th>Task rate</th><th>Error</th><th>Selection</th></tr></thead><tbody id="candidates"></tbody></table></div><p id="range-note" class="hint"></p></details>
+</section></div>
+<section class="code-section"><div class="code-heading"><div><div class="section-kicker">03 / Copy & run</div><h2>A complete Arduino sketch</h2><p>Paste into a new sketch, select your ATmega328P board, then upload. The built-in LED toggles once per task interval.</p></div><div class="buttons"><button id="download-code">Download full .ino</button><button id="copy-code" class="primary">Copy sketch</button></div></div><div class="code-tabs" role="group" aria-label="Code view"><button id="view-full" aria-pressed="true">Complete sketch</button><button id="view-isr" aria-pressed="false">Interrupt function setup</button></div><p id="code-view-note" class="hint">Includes setup, the interrupt function, and a nonblocking loop example.</p><p id="copy-status" role="status"></p><textarea id="generated-code" aria-label="Generated Arduino sketch" readonly spellcheck="false"></textarea><p class="hint">Already have setup(), loop(), or an ISR? Merge the corresponding sections instead of pasting a second copy. The example queues events and runs the task in loop(); task execution is not guaranteed to occur exactly at the interrupt edge.</p></section>
+<section class="calculator-notes"><details><summary>How the calculation works</summary><p>Timer tick = prescaler / CPU clock. In CTC, the counter visits zero through OCRnA, so interval = (OCRnA + 1) × tick. For each valid prescaler, the calculator compares the adjacent integer tick counts and chooses the one with the smallest absolute frequency error. Error is (achievable frequency − requested frequency) / requested frequency × 100%.</p><p>“Exact” means no numerical rounding error in the nominal calculation; real clocks still have tolerance. Requests outside a prescaler's counter range are marked unavailable. Enable the optional ISR counter to divide hardware interrupts for longer intervals. It uses a 32-bit counter (up to 4,294,967,295 interrupts per task). For each prescaler, it searches hardware counts and rounds the software count to the nearest integer; ties favor a lower interrupt rate.</p></details><details><summary>Timer ownership & practical limits</summary><p>The generated sketch takes exclusive control of the selected timer, including its interrupt mask and PWM outputs. Do not combine it with another library using the same timer. Timer0 changes break Arduino timekeeping; Timer1 is commonly used by Servo; Timer2 is commonly used by tone(). Timer2 assumes standard synchronous Arduino startup.</p><p>Keep interrupt routines short. At high rates, servicing interrupts and running the LED task may take longer than the interval. The mathematical timer range is not a guarantee that the example can execute at that rate. First-event timing also depends on prescaler phase.</p></details></section>
+<footer>Inspired by the <a href="https://www.8bit-era.cz/arduino-timer-interrupts-calculator.html" target="_blank" rel="noopener">8bit-era calculator</a>. References: <a href="https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf" target="_blank" rel="noopener">ATmega328P datasheet</a> · <a href="https://docs.arduino.cc/tutorials/generic/secrets-of-arduino-pwm/" target="_blank" rel="noopener">Arduino timers and PWM</a> · <a href="https://www.nongnu.org/avr-libc/user-manual/group__avr__interrupts.html" target="_blank" rel="noopener">AVR interrupt handling</a>. Works offline.</footer>
+</main><script src="timer-calculator-core.js?v=2"></script><script src="timer-calculator.js?v=3"></script></body></html>

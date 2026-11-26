@@ -13,7 +13,9 @@
     "validate": "node scripts/validate.mjs",
     "format": "prettier --write src astro.config.mjs playwright.config.ts scripts tests",
     "format:check": "prettier --check src astro.config.mjs playwright.config.ts scripts tests",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "test:teaching": "node scripts/test-teaching-models.mjs",
+    "teaching:header": "node scripts/sync-teaching-header.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",

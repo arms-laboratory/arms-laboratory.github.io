@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EME154 · Interactive Simulators</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="course.css?v=arms-2">
+<link rel="stylesheet" href="../assets/arms-header.css?v=arms-1" data-arms-header>
+<script src="../assets/arms-header.js?v=arms-1" defer data-arms-header></script>
+<meta name="description" content="Interactive EME154 mechatronics teaching models from the ARMS Laboratory at UC Davis.">
+<link rel="canonical" href="https://arms.engr.ucdavis.edu/teaching/mechatronics/simulators.html">
+<link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body><!-- ARMS HEADER START -->
+<a class="arms-skip-link" href="#teaching-content">Skip to content</a>
+<div class="arms-masthead">
+  <div class="arms-affiliation">
+    <span>University of California, Davis</span>
+    <span>Mechanical and Aerospace Engineering</span>
+  </div>
+  <header class="arms-site-header">
+    <a
+      class="arms-brand"
+      href="https://arms.engr.ucdavis.edu/"
+      aria-label="ARMS Laboratory home"
+    >
+      <img
+        src="../assets/arms-logo.svg"
+        alt="ARMS Laboratory"
+        width="1500"
+        height="806"
+      />
+    </a>
+    <button
+      class="arms-menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="arms-main-nav"
+      hidden
+    >
+      Menu <span aria-hidden="true">+</span>
+    </button>
+    <nav id="arms-main-nav" class="arms-main-nav" aria-label="Main navigation">
+      <a href="https://arms.engr.ucdavis.edu/">Home</a>
+      <a href="https://arms.engr.ucdavis.edu/research/">Research</a>
+      <a href="https://arms.engr.ucdavis.edu/members/">People</a>
+      <a href="https://arms.engr.ucdavis.edu/about/">About</a>
+      <a href="https://arms.engr.ucdavis.edu/publications/">Publications</a>
+      <a href="/teaching/" aria-current="location">Teaching</a>
+      <a href="https://arms.engr.ucdavis.edu/visit/">Contact &amp; Visit</a>
+      <a
+        class="arms-nav-join"
+        href="https://arms.engr.ucdavis.edu/open-positions/"
+        >Join ARMS</a
+      >
+    </nav>
+  </header>
+</div>
+<!-- ARMS HEADER END -->
+
+<main class="shell" id="teaching-content" tabindex="-1"><nav class="arms-course-trail" aria-label="Course navigation"><a href="/teaching/">Teaching</a><span aria-hidden="true">/</span><span aria-current="page">Mechatronics simulators</span></nav>
+<header><div><div class="eyebrow">EME154 · Interactive Learning</div><h1>Explore the mechatronics simulators.</h1><p>Choose a lab to investigate a system, change its settings, and follow what happens.</p></div></header>
+<p class="catalog-intro">The labs run in your browser. Start with a guided example, then use the controls to test your own ideas. Each page explains the assumptions behind its model.</p>
+<section class="catalog-section" aria-labelledby="microcontrollers"><h2 id="microcontrollers">Microcontrollers and timing</h2><div class="catalog-grid">
+<a class="catalog-card" href="architecture.html"><small>AVR architecture</small><strong>AVR Architecture Explorer</strong><span>Trace buses, memory, registers, the ALU, status flags, and the stack.</span></a>
+<a class="catalog-card" href="index.html"><small>AVR assembly</small><strong>AVR CPU &amp; Assembly Lab</strong><span>Write a short program and step through its effect on registers and SRAM.</span></a>
+<a class="catalog-card" href="timer.html"><small>Timers</small><strong>Timer Lab</strong><span>Explore prescalers, counter ticks, overflow, and compare events.</span></a>
+<a class="catalog-card" href="interrupt.html"><small>Interrupts</small><strong>Timer Interrupt Lab</strong><span>Follow a Timer1 compare match through an ISR and back to the main program.</span></a>
+</div></section>
+<section class="catalog-section" aria-labelledby="measurement"><h2 id="measurement">Motion and measurement</h2><div class="catalog-grid">
+<a class="catalog-card" href="encoder.html"><small>Encoders</small><strong>Encoder &amp; Speed Lab</strong><span>Connect quadrature signals to position counts and speed estimates.</span></a>
+<a class="catalog-card" href="sampling.html"><small>Position sampling</small><strong>Position Counter &amp; Sampling Lab</strong><span>See how wraparound and sample timing affect reconstructed motion.</span></a>
+<a class="catalog-card" href="frequency.html"><small>Frequency response</small><strong>Frequency Response Lab</strong><span>Link Bode plots to the motion of open and closed loop systems.</span></a>
+</div></section>
+<section class="catalog-section" aria-labelledby="control"><h2 id="control">Control and drives</h2><div class="catalog-grid">
+<a class="catalog-card" href="position.html"><small>Position control</small><strong>Position Control Lab</strong><span>Compare feedback, feedforward, following error, and in-position behavior.</span></a>
+<a class="catalog-card" href="motor.html"><small>Motor drives</small><strong>Motor &amp; Drive Lab</strong><span>Investigate H-bridges, PWM, power conversion, flyback, and three-phase fields.</span></a>
+</div></section>
+<section class="catalog-section" aria-labelledby="calculators"><h2 id="calculators">Companion calculators</h2><div class="catalog-grid">
+<a class="catalog-card" href="timer-calculator.html"><small>Timer setup</small><strong>Timer Calculator</strong><span>Calculate ATmega328P CTC settings and inspect the generated Arduino code.</span></a>
+<a class="catalog-card" href="speed-calculator.html"><small>Measurement error</small><strong>Speed Measurement Error Calculator</strong><span>Compare pulse counting and pulse duration across a speed range.</span></a>
+</div></section>
+<p class="catalog-note">These are teaching models. Read the notes on each page for the assumptions and limits of its results.</p>
+</main></body>
+</html>

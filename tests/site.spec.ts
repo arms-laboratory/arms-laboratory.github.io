@@ -5,6 +5,7 @@ import { join } from "node:path";
 
 const routes = [
   "/",
+  "/teaching/",
   "/research/",
   "/research/cognitive-manufacturing/",
   "/research/hybrid-manufacturing/",
@@ -488,8 +489,9 @@ test("search engine files use the university domain", async ({ request }) => {
   const xml = await sitemap.text();
   expect(xml).not.toContain("https://arms-laboratory.github.io");
   expect(xml.match(/<loc>https:\/\/arms\.engr\.ucdavis\.edu\//g)?.length).toBe(
-    10,
+    23,
   );
+  expect(xml).toContain("<loc>https://arms.engr.ucdavis.edu/teaching/</loc>");
 });
 
 test("legacy agentic address points to cognitive research", async ({

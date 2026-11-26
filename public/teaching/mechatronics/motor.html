@@ -1,0 +1,60 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EME154 · Motor & Drive Lab</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="motor.css"><link rel="stylesheet" href="course.css?v=arms-2"><link rel="stylesheet" href="../assets/arms-header.css?v=arms-1" data-arms-header>
+<script src="../assets/arms-header.js?v=arms-1" defer data-arms-header></script>
+<meta name="description" content="Interactive EME154 mechatronics teaching models from the ARMS Laboratory at UC Davis.">
+<link rel="canonical" href="https://arms.engr.ucdavis.edu/teaching/mechatronics/motor.html">
+<link rel="icon" href="/favicon.png" type="image/png">
+</head><body><!-- ARMS HEADER START -->
+<a class="arms-skip-link" href="#teaching-content">Skip to content</a>
+<div class="arms-masthead">
+  <div class="arms-affiliation">
+    <span>University of California, Davis</span>
+    <span>Mechanical and Aerospace Engineering</span>
+  </div>
+  <header class="arms-site-header">
+    <a
+      class="arms-brand"
+      href="https://arms.engr.ucdavis.edu/"
+      aria-label="ARMS Laboratory home"
+    >
+      <img
+        src="../assets/arms-logo.svg"
+        alt="ARMS Laboratory"
+        width="1500"
+        height="806"
+      />
+    </a>
+    <button
+      class="arms-menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="arms-main-nav"
+      hidden
+    >
+      Menu <span aria-hidden="true">+</span>
+    </button>
+    <nav id="arms-main-nav" class="arms-main-nav" aria-label="Main navigation">
+      <a href="https://arms.engr.ucdavis.edu/">Home</a>
+      <a href="https://arms.engr.ucdavis.edu/research/">Research</a>
+      <a href="https://arms.engr.ucdavis.edu/members/">People</a>
+      <a href="https://arms.engr.ucdavis.edu/about/">About</a>
+      <a href="https://arms.engr.ucdavis.edu/publications/">Publications</a>
+      <a href="/teaching/" aria-current="location">Teaching</a>
+      <a href="https://arms.engr.ucdavis.edu/visit/">Contact &amp; Visit</a>
+      <a
+        class="arms-nav-join"
+        href="https://arms.engr.ucdavis.edu/open-positions/"
+        >Join ARMS</a
+      >
+    </nav>
+  </header>
+</div>
+<!-- ARMS HEADER END -->
+
+<main class="shell motor-shell" id="teaching-content" tabindex="-1"><nav class="arms-course-trail" aria-label="Course navigation"><a href="/teaching/">Teaching</a><span aria-hidden="true">/</span><a href="simulators.html">All simulators</a><span aria-hidden="true">/</span><span aria-current="page">Motor &amp; Drive Lab</span></nav>
+<header><div><div class="eyebrow">EME154 · Interactive Lab</div><h1>Motor & Drive Lab</h1><p>Follow the energy. Watch the switching. Explain the motion.</p></div><nav class="related-links" aria-label="Related labs"><a href="position.html">Position control</a><a href="encoder.html">Encoder lab</a></nav></header>
+<nav id="experiments" class="experiment-nav" aria-label="Experiments"><button data-tab="drive" aria-pressed="true">01 · PWM & H-bridge</button><button data-tab="anatomy" aria-pressed="false">02 · Motor types</button><button data-tab="conversion" aria-pressed="false">03 · Power conversion</button><button data-tab="flyback" aria-pressed="false">04 · Flyback</button><button data-tab="phase" aria-pressed="false">05 · Three-phase drive</button></nav>
+<section class="intro"><h2 id="title"></h2><p id="intro"></p></section>
+<div id="stage-tools"></div><div class="lab-layout"><aside><h2>Experiment controls</h2><div id="controls"></div><div class="playback"><button id="play" class="primary">Play</button><button id="step">Step</button><button id="reset">Reset</button><label>Playback speed<select id="rate"><option value="0.1">Slow · 0.1×</option><option value="0.5" selected>0.5×</option><option value="1">1×</option></select></label></div><p id="time-note" class="scope"></p><section class="challenge"><h3>Predict, then try</h3><p id="challenge"></p><button id="try">Set up experiment</button><details id="answer"><summary>Reveal explanation</summary><p id="explanation"></p></details></section></aside>
+<section class="lab-main"><div id="metrics" class="metrics"></div><div class="drawing"><canvas id="scene" role="img" aria-label="Interactive motor and circuit diagram"></canvas></div><p id="scene-note" class="scene-note"></p><div id="extras"></div><div id="plots"></div><p id="status" role="status" aria-live="polite">Paused. Change a control or press Play.</p><details class="model-notes"><summary>Model, equations & limitations</summary><div id="notes"></div></details></section></div>
+<footer>Offline teaching simulator · Idealized components and illustrative motor parameters · <a href="encoder.html">Explore encoder feedback</a></footer>
+</main><script src="motor-core.js"></script><script src="motor.js"></script></body></html>

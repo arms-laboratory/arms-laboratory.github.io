@@ -1,0 +1,67 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>EME154 · AVR CPU & Assembly Lab</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="course.css?v=arms-2"><link rel="stylesheet" href="../assets/arms-header.css?v=arms-1" data-arms-header>
+<script src="../assets/arms-header.js?v=arms-1" defer data-arms-header></script>
+<meta name="description" content="Interactive EME154 mechatronics teaching models from the ARMS Laboratory at UC Davis.">
+<link rel="canonical" href="https://arms.engr.ucdavis.edu/teaching/mechatronics/index.html">
+<link rel="icon" href="/favicon.png" type="image/png">
+</head><body><!-- ARMS HEADER START -->
+<a class="arms-skip-link" href="#teaching-content">Skip to content</a>
+<div class="arms-masthead">
+  <div class="arms-affiliation">
+    <span>University of California, Davis</span>
+    <span>Mechanical and Aerospace Engineering</span>
+  </div>
+  <header class="arms-site-header">
+    <a
+      class="arms-brand"
+      href="https://arms.engr.ucdavis.edu/"
+      aria-label="ARMS Laboratory home"
+    >
+      <img
+        src="../assets/arms-logo.svg"
+        alt="ARMS Laboratory"
+        width="1500"
+        height="806"
+      />
+    </a>
+    <button
+      class="arms-menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="arms-main-nav"
+      hidden
+    >
+      Menu <span aria-hidden="true">+</span>
+    </button>
+    <nav id="arms-main-nav" class="arms-main-nav" aria-label="Main navigation">
+      <a href="https://arms.engr.ucdavis.edu/">Home</a>
+      <a href="https://arms.engr.ucdavis.edu/research/">Research</a>
+      <a href="https://arms.engr.ucdavis.edu/members/">People</a>
+      <a href="https://arms.engr.ucdavis.edu/about/">About</a>
+      <a href="https://arms.engr.ucdavis.edu/publications/">Publications</a>
+      <a href="/teaching/" aria-current="location">Teaching</a>
+      <a href="https://arms.engr.ucdavis.edu/visit/">Contact &amp; Visit</a>
+      <a
+        class="arms-nav-join"
+        href="https://arms.engr.ucdavis.edu/open-positions/"
+        >Join ARMS</a
+      >
+    </nav>
+  </header>
+</div>
+<!-- ARMS HEADER END -->
+
+<main class="shell" id="teaching-content" tabindex="-1"><nav class="arms-course-trail" aria-label="Course navigation"><a href="/teaching/">Teaching</a><span aria-hidden="true">/</span><a href="simulators.html">All simulators</a><span aria-hidden="true">/</span><span aria-current="page">AVR CPU &amp; Assembly Lab</span></nav>
+<header><div><div class="eyebrow">EME154 · Interactive Lab</div><h1>Write it. Load it. Watch it run.</h1><p>Real AVR instructions, visible memory, one operation at a time. Based on the ATmega328P used by the Arduino Uno.</p></div><nav class="related-links" aria-label="Related labs"><a href="architecture.html">AVR architecture</a><a href="timer.html">Timer lab</a></nav></header>
+<nav class="mode-bar" aria-label="Learning mode"><button id="guided" aria-pressed="true">Guided example</button><button id="programming" aria-pressed="false">Programming lab</button><span class="mode-note" id="mode-note">The load–add–store example.</span></nav>
+<div id="editor-area" hidden><details id="editor-panel" open><summary>Program editor · expand to write or load code</summary><section class="editor-area"><div><label for="source">Your assembly program</label><textarea id="source" spellcheck="false" aria-describedby="syntax-help"></textarea><div class="editor-actions"><button class="primary" id="load">Assemble & load</button><select id="example" aria-label="Choose an example"><option value="arithmetic">Load, add, store</option><option value="loop">Count down with a loop</option><option value="compare">Compare and choose</option><option value="overflow">Eight-bit overflow</option><option value="memory">Several SRAM addresses</option></select><button id="example-button">Put example in editor</button><button id="download">Save source</button></div><div class="status" id="load-status" aria-live="polite"></div><ul id="errors" class="errors" role="alert"></ul></div><div class="editor-help"><h2>Small programs. Visible consequences.</h2><p id="syntax-help">Write one instruction per line. Use labels such as <code>loop:</code>, commas between operands, and <code>;</code> for comments. Numbers can be decimal, <code>0xAB</code>, <code>$AB</code>, or <code>0b1010</code>.</p><p id="supported"></p><p><strong>Assemble</strong> turns your instructions into opcode words. <strong>Load</strong> places those words in simulated Flash and resets the CPU.</p><p>This lab starts registers, flags, and SRAM at zero for repeatable experiments. Initialize your data with instructions. These are teaching defaults, not hardware SRAM reset values.</p><p class="scope">Up to 128 program words. Direct memory access is limited to SRAM 0x0100–0x08FF. No directives, expressions, peripherals, interrupts, or stack instructions. Branches use labels. The lab stops at the end of loaded code or after 500 executed instructions.</p></div></section></details></div>
+<div class="toolbar"><div class="buttons"><button id="back">← Back</button><button id="next" class="primary">Fetch →</button><button id="play">Play</button><button id="reset">Reset CPU</button></div><div class="options"><label>Values <select id="format"><option value="dec">Decimal + hex</option><option value="hex">Hex + decimal</option></select></label><label><input id="bits" type="checkbox">8 bits</label><label><input id="animate" type="checkbox" checked>Animate</label></div></div>
+<section class="lesson" aria-live="polite" aria-atomic="true"><div class="step-number" id="phase">READY</div><div><h2 id="title"></h2><p id="description"></p></div></section>
+<section id="prediction" class="prediction" hidden><p id="question"></p><div class="buttons" id="choices"></div><p class="feedback" id="feedback" aria-live="polite"></p></section>
+<div class="workspace" id="workspace"><svg class="flow" id="flow" aria-hidden="true"></svg><section class="program" id="flash"><div class="section-label"><h2>01 / Code memory</h2><span id="word-count"></span></div><div class="code-scroll"><table class="code-table"><thead><tr><th>Word address</th><th>Opcode</th><th>Instruction / operand</th></tr></thead><tbody id="code"></tbody></table></div><div class="pc-line"><span class="pc" id="pc"></span><span id="pc-explain"></span></div><p class="code-note">Each row holds one 16-bit word. LDS and STS occupy two rows. Select an instruction to read its explanation.</p><div class="legend"><span><strong>PC</strong> selects the next word</span><span>Highlighted rows form one instruction</span></div></section>
+<div class="machine"><section class="cpu"><div class="section-label"><h2>02 / CPU workbench</h2><span id="register-note">Operands in focus</span></div><div class="registers" id="registers"></div><div class="alu" id="alu"><div class="alu-label">Arithmetic logic unit</div><div class="equation" id="equation">Waiting for arithmetic</div></div><div class="flags" id="flags" aria-label="Status register flags"></div><details><summary>All 32 registers</summary><div class="register-grid" id="all-registers"></div></details></section>
+<section class="memory"><div class="section-label"><h2>03 / Data memory</h2><span>SRAM · 8-bit bytes</span></div><form class="memory-controls" id="memory-form"><label for="watch">Inspect address</label><input id="watch" value="0x0100" aria-label="SRAM byte address"><button id="inspect">Inspect</button><label><input type="checkbox" id="follow" checked>Follow memory access</label></form><div class="sram-toolbar"><label for="sram-view">Memory cells</label><select id="sram-view"><option value="all">All SRAM · 2,048 bytes</option><option value="used">Addresses used by this program</option></select><span id="sram-count"></span></div><div id="sram-grid" class="sram-grid" role="group" aria-label="SRAM bytes by address"></div><p class="sram-help">Scroll to browse every byte, or enter an address above to jump to it. Select a cell for the enlarged view below. Read and write labels follow execution.</p><p id="memory-error" class="error" role="alert" hidden></p><div class="memory-stack"><div class="memory-byte" id="mem"><h3><span id="memory-address" class="mono"></span><span class="changed-tag" id="memtag"></span></h3><div class="byte-content"><div><div class="value" id="memvalue"></div><div class="secondary" id="memsecondary"></div></div><div class="bits" id="membits" hidden></div></div></div></div></section></div></div>
+<div class="footer-tools"><label><input type="checkbox" id="predict"> Predict before executing</label><span class="clock" id="clock"></span></div>
+<section class="reference"><div><div class="section-label"><h2>Instruction guide</h2><select id="reference-select" aria-label="Instruction reference"></select></div><code id="ref-syntax"></code><p id="ref-description"></p><p id="ref-operands"></p><div class="effect" id="ref-effect"></div><div class="fact-row"><span id="ref-size"></span><span id="ref-cycles"></span><span id="ref-flags"></span></div><a id="manual" target="_blank" rel="noopener">Read the manual</a></div><div class="live-effect"><h2 id="effect-title">For the selected instruction</h2><p id="effect"></p><p class="scope">This explanation uses the CPU's current values. Selecting a row does not move the PC.</p></div></section>
+<div class="settings"><details id="guided-settings"><summary>Guided starting values</summary><form id="setup"><div class="inputs"><label>R1<input id="input-r1" value="171"></label><label>SRAM[0x0100]<input id="input-mem" value="15"></label><button id="apply">Apply & reset</button></div><p id="error" class="error" role="alert"></p></form></details><details><summary>Execution history</summary><ol class="trace" id="trace"></ol></details><details><summary>Memory map & teaching notes</summary><table><tr><th>Data byte addresses</th><th>Contents</th></tr><tr><td>0x0000–0x001F</td><td>R0–R31</td></tr><tr><td>0x0020–0x005F</td><td>I/O registers</td></tr><tr><td>0x0060–0x00FF</td><td>Extended I/O</td></tr><tr><td>0x0100–0x08FF</td><td>2 KB SRAM</td></tr></table><p>Flash has a separate address space: 32 KB, or 16K instruction words. Fetch and execute are teaching pauses, not separate hardware clock cycles. The displayed PC is held during fetch and updated after execute.</p><p>Only the listed instruction subset is modeled. SRAM addresses outside the permitted range are rejected even though LDS/STS encodings can represent other addresses. A real CPU does not automatically stop at the end of this listing.</p><p>The guided example uses R1 as an addend. Arduino's compiler normally reserves R1 as a zero register. This is standalone assembly simulation, not inline assembly for an Arduino sketch.</p></details><details><summary>What the flags mean</summary><p><strong>C</strong> unsigned carry (ADD) or borrow (SUB/CPI); <strong>Z</strong> zero; <strong>N</strong> result's sign bit; <strong>V</strong> signed overflow; <strong>S</strong> N XOR V; <strong>H</strong> carry/borrow across bit 3. DEC preserves C and H. Loads, stores, moves, and branches preserve all flags.</p><p>I and T are not displayed or changed by this instruction subset. BREQ/BRNE test the most recent Z flag, not the register contents directly.</p></details></div>
+<footer><a href="architecture.html">AVR Architecture Explorer</a> · <a href="motor.html">Motor &amp; Drive Lab</a> · <a href="position.html">Position Control Lab</a> · <a href="frequency.html">Frequency Response Lab</a> · <a href="sampling.html">Position Counter & Sampling Lab</a> · <a href="encoder.html">Encoder & Speed Lab</a> · <a href="speed-calculator.html">Speed error calculator</a> · <a href="timer-calculator.html">Timer calculator & Arduino code</a> · <a href="timer.html">Open the AVR Timer lab</a> · ATmega328P teaching model · Reference: Atmel AVR Instruction Set Manual, Atmel-0856L (2016), supplied with this project. <a href="manual.pdf" target="_blank" rel="noopener">Open reference PDF</a></footer>
+</main><script src="avr.js"></script><script src="app.js"></script></body></html>

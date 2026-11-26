@@ -1,0 +1,68 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EME154 · Frequency Response Lab</title><link rel="stylesheet" href="style.css?v=b4beea52b0"><link rel="stylesheet" href="frequency.css?v=7f6d4eecdc"><link rel="stylesheet" href="course.css?v=arms-2"><link rel="stylesheet" href="../assets/arms-header.css?v=arms-1" data-arms-header>
+<script src="../assets/arms-header.js?v=arms-1" defer data-arms-header></script>
+<meta name="description" content="Interactive EME154 mechatronics teaching models from the ARMS Laboratory at UC Davis.">
+<link rel="canonical" href="https://arms.engr.ucdavis.edu/teaching/mechatronics/frequency.html">
+<link rel="icon" href="/favicon.png" type="image/png">
+</head><body><!-- ARMS HEADER START -->
+<a class="arms-skip-link" href="#teaching-content">Skip to content</a>
+<div class="arms-masthead">
+  <div class="arms-affiliation">
+    <span>University of California, Davis</span>
+    <span>Mechanical and Aerospace Engineering</span>
+  </div>
+  <header class="arms-site-header">
+    <a
+      class="arms-brand"
+      href="https://arms.engr.ucdavis.edu/"
+      aria-label="ARMS Laboratory home"
+    >
+      <img
+        src="../assets/arms-logo.svg"
+        alt="ARMS Laboratory"
+        width="1500"
+        height="806"
+      />
+    </a>
+    <button
+      class="arms-menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="arms-main-nav"
+      hidden
+    >
+      Menu <span aria-hidden="true">+</span>
+    </button>
+    <nav id="arms-main-nav" class="arms-main-nav" aria-label="Main navigation">
+      <a href="https://arms.engr.ucdavis.edu/">Home</a>
+      <a href="https://arms.engr.ucdavis.edu/research/">Research</a>
+      <a href="https://arms.engr.ucdavis.edu/members/">People</a>
+      <a href="https://arms.engr.ucdavis.edu/about/">About</a>
+      <a href="https://arms.engr.ucdavis.edu/publications/">Publications</a>
+      <a href="/teaching/" aria-current="location">Teaching</a>
+      <a href="https://arms.engr.ucdavis.edu/visit/">Contact &amp; Visit</a>
+      <a
+        class="arms-nav-join"
+        href="https://arms.engr.ucdavis.edu/open-positions/"
+        >Join ARMS</a
+      >
+    </nav>
+  </header>
+</div>
+<!-- ARMS HEADER END -->
+
+<main class="shell" id="teaching-content" tabindex="-1"><nav class="arms-course-trail" aria-label="Course navigation"><a href="/teaching/">Teaching</a><span aria-hidden="true">/</span><a href="simulators.html">All simulators</a><span aria-hidden="true">/</span><span aria-current="page">Frequency Response Lab</span></nav>
+<header><div><div class="eyebrow">EME154 · Interactive Lab</div><h1>From frequency to motion.</h1><p>Connect a point on the Bode plot to the amplitude and phase of the output.</p></div><nav class="related-links" aria-label="Related labs"><a href="position.html">Position control</a><a href="sampling.html">Sampling lab</a></nav></header>
+<div class="freq-layout"><aside><form id="settings"><h2>System & excitation</h2><label>System case<select id="system"></select></label><label>Input frequency, f (Hz)<input id="f" type="number" min="0.001" max="10000" step="any" value="1" required></label><label>Explore frequency (log scale)<input id="frequency-slider" type="range" min="-3" max="4" step="0.005" value="0"></label><label>Input amplitude, A (mm)<input id="A" type="number" min="0.001" max="100" step="any" value="1" required></label><label>Controller gain, K (s⁻¹)<input id="K" type="number" min="0.000001" max="2000000" step="any" value="10" required></label><label>Mass, m (kg)<input id="m" type="number" min="0.01" max="100" step="any" value="1" required></label><label>Spring stiffness, k (N/m)<input id="k" type="number" min="1" max="1000000" step="any" value="10000" required></label><label>Damping, c (N·s/m)<input id="c" type="number" min="0.01" max="10000" step="any" value="20" required></label><div class="buttons"><button class="primary" type="submit">Apply parameters</button><button id="reset" type="button">Defaults</button><button id="resonance-demo" type="button">Resonance demo</button></div><p id="dirty" role="status"></p></form><p class="scope">Defaults represent a small compliant motion stage. They are teaching values, not measured equipment data.</p><div id="mechanical-info"></div></aside>
+<section class="freq-main"><div class="model"><h2 id="case-title"></h2><p id="flow"></p><p id="formula" class="mono"></p><p id="case-note"></p></div>
+<section id="feedback-info" hidden><p id="stability" role="status"></p><div class="buttons" id="feedback-presets"><button type="button" data-ratio="0.25">Slow · K = ¼ limit</button><button type="button" data-ratio="0.75">Oscillatory · K = ¾ limit</button><button type="button" data-ratio="1">Stability boundary</button><button type="button" data-ratio="1.25">Unstable · K = 1¼ limit</button></div></section>
+<div class="plot-heading"><h2>Bode plots</h2><label><input id="compare" type="checkbox"> Compare all cases</label></div><p class="scope">Click either Bode plot to choose frequency. Dashed lines show the ideal 0 dB / 0° reference.</p><div id="legend" class="freq-legend"></div><svg id="magnitude" role="img" aria-label="Magnitude versus frequency"></svg><svg id="phase" role="img" aria-label="Phase versus frequency"></svg>
+<div id="readout" class="readout" aria-live="polite"></div>
+<div class="plot-heading"><h2>Input & output</h2><label>Response<select id="mode"><option value="periodic">Sinusoidal component</option><option value="startup">Start from rest</option></select></label><label>View<select id="cycles"><option value="3">3 input cycles</option><option value="6">6 input cycles</option><option value="12">12 input cycles</option></select></label></div><p class="freq-legend"><span class="input-key">Dashed: input x</span><span class="output-key">Solid: output y</span></p><section class="motion-section" aria-label="Synchronized motion animation"><h2>Watch the motion</h2>
+<div class="motion-controls"><button type="button" id="motion-play" class="primary">Play</button><button type="button" id="motion-reset">Rewind</button><label>Playback speed<select id="motion-speed"><option value="0.25">Slow · ¼×</option><option value="0.5">½×</option><option value="1" selected>1×</option></select></label><label>Displacement scale<select id="motion-scale"><option value="fit">Fit whole run</option><option value="2">±2 input amplitudes</option><option value="10">±10 input amplitudes</option></select></label></div>
+<p id="motion-timing" class="scope"></p><svg id="motion" role="img" aria-label="Target and output motion with spring and grounded damper for mechanical cases"></svg>
+<label for="motion-time">Time cursor <output id="motion-time-label">0 s</output></label><input id="motion-time" type="range" min="0" max="1000" step="1" value="0" aria-label="Animation time cursor">
+<p id="motion-values" class="mono"></p><p id="motion-status" role="status" aria-live="polite">Paused. Press Play or scrub the time cursor.</p><p class="scope">Dashed blue target and solid green output share a displacement scale. Orange marks the moving spring end. The damper attaches to fixed ground. Geometry is schematic; labels show actual displacement in mm. Scale stays fixed during playback.</p></section>
+<svg id="wave" role="img" aria-label="Input and output displacement versus time"></svg><p id="wave-note"></p>
+<details><summary>Compare every case at the selected frequency</summary><div class="table-scroll"><table><thead><tr><th>Case</th><th>Gain</th><th>dB</th><th>Phase (°)</th><th>Output amplitude (mm)</th></tr></thead><tbody id="comparison"></tbody></table></div></details>
+<details><summary>Model & equations</summary><p>All cases use H(s) = Y(s)/X(s), angular frequency ω = 2πf, and x(t) = A sin(ωt). The sinusoidal output is A|H(jω)| sin(ωt + arg H). Magnitude in dB is 20 log₁₀|H|. The complex FRF supplies both magnitude and phase; a Bode plot displays these against logarithmic frequency.</p><p>The mechanism follows mÿ + cẏ + ky = kx. Its damper connects the mass to ground. A damper between the moving spring end and the mass would give a different numerator. The combined case cascades the ideal motion integrator and this mechanism. It has no position feedback. The feedback extension measures final mass position and uses ż = K(x − y), mÿ + cẏ + ky = kz, with z the spring-end position. Thus H(s) = Kk/(ms³ + cs² + ks + Kk). For positive parameters, the Routh criterion gives stability exactly when K &lt; c/m. At equality, poles lie at ±j√(k/m) and −c/m; resonant excitation grows without bound.</p><p>The feedback startup response uses a matrix exponential of the continuous linear system and sinusoidal input. Marginal and unstable cases always display startup, since their formal frequency-domain values do not predict an attracting steady response. Plots stop if amplitude exceeds one million times input amplitude, or shorten the time window to resolve fast oscillations. These are display limits, not physical saturation.</p><p>K denotes controller gain, while k denotes spring stiffness. The response ratio is output/input, Y/X. Phase uses the correct quadrant and remains continuous down to −270° for the cascade.</p><p>Start from rest means zero initial position, velocity, and integrator state. Sinusoidal component isolates the FRF response. An integrator's initial-condition offset does not decay, so its periodic response is not a unique attracting steady state. Ideal tracking has no dynamic state. The model is linear and continuous in time: saturation, sampling, friction, sensor noise, and actuator limits are excluded. No PID controller is introduced in these cases.</p></details>
+</section></div><footer>Offline frequency response teaching model</footer></main><script src="frequency-core.js?v=8d834255cf"></script><script src="frequency-animation.js?v=integrity-1"></script><script src="frequency.js?v=integrity-1"></script></body></html>

@@ -1,0 +1,46 @@
+/* Shared frame for the EME154 simulator collection. Lab controls remain page-specific. */
+:root{--paper:#f8f8f4;--ink:#172c43;--muted:#526477;--green:#315f7c;--mint:#e9f0f4;--line:#d4dce1;--orange:#a54826;--cream:#fff;--blue:#426b9b;--signal-green:#086b54;--signal-blue:#355c93;--signal-orange:#a44c1b}
+body{font-family:"Segoe UI",Arial,sans-serif}
+.shell svg text,.architecture-shell svg text{font-family:"Segoe UI",Arial,sans-serif}
+.shell,.architecture-shell{max-width:1400px;margin-inline:auto;padding:32px 38px}
+.course-nav{border-top:4px solid var(--ink);padding-top:12px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:25px;font-size:14px;line-height:1.5}
+.course-affiliation{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.course-nav .course-back{display:inline-block;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--cream);color:var(--green);font-weight:700;text-decoration:none}
+.course-nav .course-back:hover,.course-nav .course-back:focus-visible{border-color:var(--green);background:var(--mint)}
+.course-nav .course-brand{color:var(--ink);font-weight:700;letter-spacing:.02em;text-decoration:none}
+.course-nav .course-brand:hover{text-decoration:underline}
+.course-nav .course-links{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.course-nav .course-links a{display:inline-block;color:var(--green);padding:6px 11px;border:1px solid var(--line);border-radius:6px;text-decoration:none;background:var(--cream)}
+.course-nav .course-links a:hover,.course-nav .course-links a:focus-visible{border-color:var(--green);background:var(--mint)}
+.course-nav .course-links [aria-current=page]{background:var(--ink);border-color:var(--ink);color:white}
+button.primary,.primary{background:var(--ink);border-color:var(--ink);color:white}
+button.primary:hover:not(:disabled),.primary:hover:not(:disabled){background:#274665;border-color:#274665;color:white}
+.cpu,.editor-area,.sram-grid,.controls,.configuration,.calculator-input{background:#eef2f4}
+#generated-code{background:#14273b;color:#eaf1f6;border-color:#2c4660}
+.bit.on{background:#dceaf3;color:var(--ink)}
+.shell>header,.architecture-shell>header{margin-bottom:26px}
+.shell>header .eyebrow,.architecture-shell>header .eyebrow{text-transform:uppercase;font-size:12px;letter-spacing:2px;font-weight:700;color:var(--green)}
+.shell>header h1,.architecture-shell>header h1{font-size:clamp(30px,3.4vw,44px);font-weight:500;line-height:1.13;letter-spacing:-1.5px;margin:8px 0 9px}
+.shell>header p,.architecture-shell>header p{line-height:1.5}
+.shell>header .related-links{display:flex;justify-content:flex-end;align-items:center;gap:8px;flex-wrap:wrap;max-width:460px;font-size:14px;line-height:1.4;white-space:normal}
+.shell>header .related-links a{display:inline-block;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--cream);color:var(--green);text-decoration:none}
+.shell>header .related-links a:hover,.shell>header .related-links a:focus-visible{background:var(--mint);border-color:var(--green)}
+.catalog-intro{max-width:830px;color:var(--muted);line-height:1.6;margin:0 0 28px}
+.catalog-section{margin:32px 0}
+.catalog-section h2{font-size:23px;margin:0 0 16px}
+.catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.catalog-card{display:block;background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:19px;text-decoration:none;color:var(--ink);min-width:0}
+.catalog-card:hover,.catalog-card:focus-visible{border-color:var(--green);box-shadow:0 3px 12px #172c431b}
+.catalog-card small{display:block;color:var(--green);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.catalog-card strong{display:block;font-size:19px;line-height:1.3;margin-bottom:8px}
+.catalog-card span{display:block;color:var(--muted);font-size:14px;line-height:1.5}
+.catalog-note{font-size:14px;color:var(--muted);line-height:1.6;border-top:1px solid var(--line);padding-top:18px;margin-top:30px}
+@media(max-width:900px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.shell>header,.architecture-shell>header{align-items:flex-start}}
+@media(max-width:700px){.shell,.architecture-shell{padding:20px 16px}.course-nav{margin-bottom:22px}.shell>header,.architecture-shell>header{display:block}.shell>header .related-links{justify-content:flex-start;max-width:none;margin-top:17px}.catalog-grid{grid-template-columns:1fr}}
+
+/* Teaching-series colors are independent of navigation/branding colors. */
+.shell .legend .green{color:var(--signal-green)}
+.shell .legend .blue{color:var(--signal-blue)}
+.shell .legend .orange{color:var(--signal-orange)}
+.input-key{color:var(--signal-blue)}
+.output-key{color:var(--signal-green)}

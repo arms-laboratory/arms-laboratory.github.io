@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EME154 · Position Counter & Sampling Lab</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="encoder.css"><link rel="stylesheet" href="sampling.css"><link rel="stylesheet" href="course.css?v=arms-2"><link rel="stylesheet" href="../assets/arms-header.css?v=arms-1" data-arms-header>
+<script src="../assets/arms-header.js?v=arms-1" defer data-arms-header></script>
+<meta name="description" content="Interactive EME154 mechatronics teaching models from the ARMS Laboratory at UC Davis.">
+<link rel="canonical" href="https://arms.engr.ucdavis.edu/teaching/mechatronics/sampling.html">
+<link rel="icon" href="/favicon.png" type="image/png">
+</head><body><!-- ARMS HEADER START -->
+<a class="arms-skip-link" href="#teaching-content">Skip to content</a>
+<div class="arms-masthead">
+  <div class="arms-affiliation">
+    <span>University of California, Davis</span>
+    <span>Mechanical and Aerospace Engineering</span>
+  </div>
+  <header class="arms-site-header">
+    <a
+      class="arms-brand"
+      href="https://arms.engr.ucdavis.edu/"
+      aria-label="ARMS Laboratory home"
+    >
+      <img
+        src="../assets/arms-logo.svg"
+        alt="ARMS Laboratory"
+        width="1500"
+        height="806"
+      />
+    </a>
+    <button
+      class="arms-menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="arms-main-nav"
+      hidden
+    >
+      Menu <span aria-hidden="true">+</span>
+    </button>
+    <nav id="arms-main-nav" class="arms-main-nav" aria-label="Main navigation">
+      <a href="https://arms.engr.ucdavis.edu/">Home</a>
+      <a href="https://arms.engr.ucdavis.edu/research/">Research</a>
+      <a href="https://arms.engr.ucdavis.edu/members/">People</a>
+      <a href="https://arms.engr.ucdavis.edu/about/">About</a>
+      <a href="https://arms.engr.ucdavis.edu/publications/">Publications</a>
+      <a href="/teaching/" aria-current="location">Teaching</a>
+      <a href="https://arms.engr.ucdavis.edu/visit/">Contact &amp; Visit</a>
+      <a
+        class="arms-nav-join"
+        href="https://arms.engr.ucdavis.edu/open-positions/"
+        >Join ARMS</a
+      >
+    </nav>
+  </header>
+</div>
+<!-- ARMS HEADER END -->
+
+<main class="shell" id="teaching-content" tabindex="-1"><nav class="arms-course-trail" aria-label="Course navigation"><a href="/teaching/">Teaching</a><span aria-hidden="true">/</span><a href="simulators.html">All simulators</a><span aria-hidden="true">/</span><span aria-current="page">Position Counter &amp; Sampling Lab</span></nav>
+<header><div><div class="eyebrow">EME154 · Interactive Lab</div><h1>When a count hides the motion.</h1><p>Explore the prescaler counter: reconstruct position from periodic counter readings.</p></div><nav class="related-links" aria-label="Related labs"><a href="encoder.html">Encoder lab</a><a href="speed-calculator.html">Speed calculator</a></nav></header>
+<section class="lesson-box"><label for="preset">Choose a demonstration </label><select id="preset"><option value="proper">01 · Proper sampling · +5 counts</option><option value="improper">02 · Improper sampling · +11 counts</option><option value="experiment">03 · Experiment with parameters</option><option value="lecture">16 bit at 3000 RPM</option></select><h2 id="lesson-title"></h2><p id="lesson"></p></section>
+<div class="encoder-layout"><form id="settings" class="controls"><h2>Sampling design</h2><label>Counter width, m<select id="bits"><option value="4">4 bit · 0–15</option><option value="8">8 bit · 0–255</option><option value="16">16 bit · 0–65,535</option></select></label><label>Encoder cycles / revolution<input id="cycles" type="number" min="1" max="65536" step="1" value="16" required></label><label>Decoding<select id="decode"><option value="1">×1</option><option value="2">×2</option><option value="4">×4</option></select></label><label>Shaft speed (RPM)<input id="rpm" type="number" min="-10000" max="10000" step="any" value="18.75" required></label><label>Sampling interval, Ts (ms)<input id="ts" type="number" min="0.001" max="1000000" step="any" value="1000" required></label><label>Initial counter reading<input id="initial" type="number" min="0" max="15" step="1" value="12" required></label><button class="primary">Apply & reset</button><button id="boundary" type="button">Try the exact boundary</button><button id="reverse" type="button">Reverse & reset</button><p id="dirty" class="scope" hidden>Unapplied changes. The plots use the last applied settings.</p><p id="error" class="error" role="alert"></p><p class="scope">This prescaler is a finite position counter. It is distinct from a timer clock divider.</p></form>
+<section class="panel"><div class="toolbar"><div class="buttons"><button id="play" class="primary">▶ Play</button><button id="step">Next sample</button><button id="back">Back</button><button id="reset">Reset</button></div><span id="progress" class="scope"></span></div><p class="scope">Playback reveals one sample at a time. Animation speed does not change Ts. Select a completed sample marker or a table row to inspect its calculation.</p>
+<div id="stats" class="stats"></div><div id="rule" class="notice"></div><div class="chart-wrap"><svg id="plots" viewBox="0 0 900 620" role="img" aria-labelledby="chart-title chart-desc"><title id="chart-title">Position and counter readings on one time axis</title><desc id="chart-desc">Actual position, wrapped hardware count, and sampled reconstructed position. Vertical lines connect sampling instants.</desc></svg></div><p id="plot-note" class="scope"></p><p class="legend"><span class="green">Green: actual position</span><span class="orange">Amber: hardware count</span><span class="blue">Blue: reconstructed position</span><span>Dashed green reference repeats actual position in the bottom plot.</span></p>
+<section class="sample-detail"><h2 id="sample-title"></h2><div id="calculation" class="math"></div><button id="explain">Explain this sample</button><div id="explanation" class="notice" hidden></div></section>
+<h2>Sample history</h2><div class="table-scroll"><table><thead><tr><th>Sample</th><th>Time (ms)</th><th>Reading</th><th>Actual Δ</th><th>Inferred Δ</th><th>Position error</th></tr></thead><tbody id="history"></tbody></table></div>
+</section></div><details><summary>Model assumptions and the half-range rule</summary><p>The encoder produces ideal uniformly spaced decoded counts. The hardware counter wraps modulo 2ᵐ. Software selects the signed difference in [−2ᵐ⁻¹, 2ᵐ⁻¹−1] and adds it to its previous position. At exactly half the range either direction is possible; this implementation chooses the negative value. Even if that happens to match actual motion, the readings alone cannot establish the direction.</p><p>The design rule is |n| p Ts / 60 &lt; 2ᵐ⁻¹, using effective decoded counts/revolution p. Leave margin: fractional expected counts can round to a half-range increment in an individual sampling window. Actual position is shown as a continuous reference in equivalent encoder-count units; hardware readings are integers. The initial encoder phase is a quarter count into a bin and software starts with the known initial reading.</p><p>Uniform speed, no missed edges, ideal sampling, and unlimited software position range are assumed. Direction is inferred only from counter readings; no separate direction bit is used. Noise, ISR latency, homing, and absolute encoders are outside this draft. </p></details><footer><a href="encoder.html">Encoder & Speed Lab</a> · <a href="speed-calculator.html">Speed error calculator</a> · Inside AVR · Position Counter & Sampling Lab</footer>
+</main><script src="sampling-core.js"></script><script src="sampling.js"></script></body></html>

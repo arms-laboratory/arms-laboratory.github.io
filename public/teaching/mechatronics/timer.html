@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>EME154 · Timer Lab</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="timer.css"><link rel="stylesheet" href="course.css?v=arms-2"><link rel="stylesheet" href="../assets/arms-header.css?v=arms-1" data-arms-header>
+<script src="../assets/arms-header.js?v=arms-1" defer data-arms-header></script>
+<meta name="description" content="Interactive EME154 mechatronics teaching models from the ARMS Laboratory at UC Davis.">
+<link rel="canonical" href="https://arms.engr.ucdavis.edu/teaching/mechatronics/timer.html">
+<link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body><!-- ARMS HEADER START -->
+<a class="arms-skip-link" href="#teaching-content">Skip to content</a>
+<div class="arms-masthead">
+  <div class="arms-affiliation">
+    <span>University of California, Davis</span>
+    <span>Mechanical and Aerospace Engineering</span>
+  </div>
+  <header class="arms-site-header">
+    <a
+      class="arms-brand"
+      href="https://arms.engr.ucdavis.edu/"
+      aria-label="ARMS Laboratory home"
+    >
+      <img
+        src="../assets/arms-logo.svg"
+        alt="ARMS Laboratory"
+        width="1500"
+        height="806"
+      />
+    </a>
+    <button
+      class="arms-menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="arms-main-nav"
+      hidden
+    >
+      Menu <span aria-hidden="true">+</span>
+    </button>
+    <nav id="arms-main-nav" class="arms-main-nav" aria-label="Main navigation">
+      <a href="https://arms.engr.ucdavis.edu/">Home</a>
+      <a href="https://arms.engr.ucdavis.edu/research/">Research</a>
+      <a href="https://arms.engr.ucdavis.edu/members/">People</a>
+      <a href="https://arms.engr.ucdavis.edu/about/">About</a>
+      <a href="https://arms.engr.ucdavis.edu/publications/">Publications</a>
+      <a href="/teaching/" aria-current="location">Teaching</a>
+      <a href="https://arms.engr.ucdavis.edu/visit/">Contact &amp; Visit</a>
+      <a
+        class="arms-nav-join"
+        href="https://arms.engr.ucdavis.edu/open-positions/"
+        >Join ARMS</a
+      >
+    </nav>
+  </header>
+</div>
+<!-- ARMS HEADER END -->
+
+<main class="shell" id="teaching-content" tabindex="-1"><nav class="arms-course-trail" aria-label="Course navigation"><a href="/teaching/">Teaching</a><span aria-hidden="true">/</span><a href="simulators.html">All simulators</a><span aria-hidden="true">/</span><span aria-current="page">Timer Lab</span></nav>
+<header><div><div class="eyebrow">EME154 · Interactive Lab</div><h1>Make every tick count.</h1><p>Explore AVR timers. Follow a demonstration, then change the registers yourself.</p></div><nav class="related-links" aria-label="Related labs"><a href="interrupt.html">Interrupt lab</a><a href="timer-calculator.html">Timer calculator</a><a href="index.html">CPU lab</a></nav></header>
+<div class="mode-bar"><button id="guided" aria-pressed="true">Guided demonstrations</button><button id="lab" aria-pressed="false">Experiment lab</button><span class="mode-note">ATmega328P · Timer0, Timer1 & Timer2</span></div>
+<section id="demo-panel" class="demo-panel"><div class="demo-top"><label for="demo">Demonstration</label><select id="demo"><option value="0">01 · Normal: watch the overflow</option><option value="1">02 · CTC: count to a chosen TOP</option><option value="2">03 · One second with a preload</option><option value="3">04 · One second with CTC</option></select><button id="restart-demo">Restart demo</button></div><div class="lesson"><span class="step-number" id="lesson-step"></span><div><h2 id="lesson-title"></h2><p id="lesson-text"></p></div></div><button id="lesson-next">Next explanation →</button></section>
+<div class="timer-layout"><aside class="configuration"><h2>Timer settings</h2><p class="scope">Edit settings, then apply to start a fresh run. Decimal and 0x hexadecimal values are accepted.</p>
+<form id="settings-form"><label>Timer<select id="timer"><option value="0">Timer0 · 8 bit</option><option value="1">Timer1 · 16 bit</option><option value="2">Timer2 · 8 bit</option></select></label><label>Counting mode<select id="timer-mode"><option value="normal">Normal · fixed maximum</option><option value="ctc">CTC · OCRnA is TOP</option></select></label><label>Clock frequency (MHz)<input id="frequency" type="number" min="0.001" max="20" step="any" value="16" required></label><label>Prescaler / clock<select id="prescaler"></select></label><label>Initial TCNTn<input id="preload" value="250" required></label><label>OCRnA · compare A / CTC TOP<input id="compare-a" value="128" required></label><label>OCRnB · compare B<input id="compare-b" value="64" required></label><label class="check"><input id="reload" type="checkbox"> Reload initial TCNT after overflow</label><p class="scope">Reload is an idealized software action with zero delay; hardware normally restarts at zero.</p><button class="primary" type="submit">Apply & reset</button><p id="settings-error" class="error" role="alert"></p><p id="dirty" class="scope" hidden>Unapplied edits — the display still uses the loaded settings.</p></form></aside>
+<section class="instrument"><div class="toolbar"><div class="buttons"><button id="play" class="primary">▶ Play</button><button id="tick">Step 1 tick</button><button id="event">Next event</button><button id="reset">Reset</button></div><label>Playback <select id="speed"><option value="4">4 ticks/s</option><option value="30">30 ticks/s</option><option value="1000">1,000 ticks/s</option><option value="20000">20,000 ticks/s</option></select></label></div><p class="scope">Playback is slowed for observation. Simulated time uses the clock and prescaler, independently of playback speed.</p>
+<div class="signal-path"><div><small>Clock</small><strong id="clock-label"></strong></div><span>→</span><div><small>Prescaler</small><strong id="divider-label"></strong></div><span>→</span><div class="counter"><small id="counter-label"></small><strong id="count"></strong><code id="count-hex"></code></div><span>→</span><div><small id="top-label"></small><strong id="top"></strong></div></div>
+<div class="stats"><div><small>Simulated elapsed time</small><strong id="elapsed"></strong></div><div><small>Timer tick period</small><strong id="period"></strong></div><div><small>Timer ticks elapsed</small><strong id="ticks"></strong></div></div>
+<p id="live-explanation" class="live-explanation" aria-live="polite"></p>
+<div class="plot-head"><h2>Counter over time</h2><span>Most recent 700 ticks · event markers in amber</span></div><svg id="plot" viewBox="0 0 860 220" role="img" aria-label="Counter value versus elapsed timer ticks"></svg><div class="plot-head"><span id="plot-range"></span><span>Horizontal axis: timer ticks</span></div>
+<h2>Live registers</h2><p class="scope">Control bits follow the applied settings. Flags stay set until cleared. Select a flag to write 1 and clear it.</p><div id="registers" class="timer-registers"></div><div id="flag-buttons" class="buttons"></div>
+<div class="timing"><h2>Timing calculation</h2><p id="formula"></p><p id="warning"></p></div>
+<details><summary>Recent events & totals</summary><p id="totals"></p><ol id="events" class="trace"></ol></details></section></div>
+<section class="timer-notes"><details><summary>Try these experiments</summary><ol><li>With Timer0 in normal mode, start at 250. Predict how many ticks remain before overflow.</li><li>Choose CTC, set OCRnA to 9 and OCRnB to 4. Which flag appears first? Does compare B reset the counter?</li><li>Double the prescaler. What happens to the tick period and the interval between events?</li><li>Use Timer1, CTC, 16 MHz and /1024. Find OCR1A for a 0.5-second interval. <details><summary>Check your answer</summary><p>7,811.5 ticks would be needed, so exactly 0.5 s is impossible with /1024. OCR1A = 7,811 gives 0.499968 s; 7,812 gives 0.500032 s. Use /256 and OCR1A = 31,249 for exactly 0.5 s.</p></details></li></ol></details><details><summary>Model scope & timing notes</summary><p>This is a standalone synchronous timer model, not a full CPU emulator. It covers normal mode and CTC with OCRnA as TOP, compare A/B, prescalers, counter values, and sticky flags. It excludes PWM, interrupts, output pins, external clocks, asynchronous Timer2, prescaler phase, and byte-access timing. Timer1 values are shown as combined 16-bit registers and high/low bytes. Control fields outside this model remain zero.</p><p>Each step is a prescaled timer edge. Equality during a count interval sets OCF on the following timer edge; CTC clears at that edge. Thus a cycle from zero takes OCRnA + 1 ticks. Overflow sets TOV on MAX → 0. OCRnB never sets TOP. CTC clearing is a compare event.</p><p>Normal-mode preload affects only the first interval unless software writes it again. The optional reload assumes no software latency. Settings are applied together while stopped; live register-write edge cases are outside this model.</p><p>Hardware reference: <a href="https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf" target="_blank" rel="noopener">Microchip ATmega328P datasheet, timer chapters</a>.</p></details></section>
+<footer><a href="sampling.html">Position Counter & Sampling Lab</a> · <a href="encoder.html">Encoder & Speed Lab</a> · <a href="speed-calculator.html">Speed error calculator</a> · Inside AVR · Timer lab · Works offline · <a href="index.html">Open the CPU simulator</a></footer>
+</main><script src="timer-engine.js"></script><script src="timer.js"></script></body></html>
