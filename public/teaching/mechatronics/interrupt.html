@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EME154 · Timer Interrupt Lab</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="interrupt.css"><link rel="stylesheet" href="course.css?v=arms-2"><link rel="stylesheet" href="../assets/arms-header.css?v=arms-1" data-arms-header>
+<script src="../assets/arms-header.js?v=arms-1" defer data-arms-header></script>
+<meta name="description" content="Interactive EME154 mechatronics teaching models from the ARMS Laboratory at UC Davis.">
+<link rel="canonical" href="https://arms.engr.ucdavis.edu/teaching/mechatronics/interrupt.html">
+<link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body><!-- ARMS HEADER START -->
+<a class="arms-skip-link" href="#teaching-content">Skip to content</a>
+<div class="arms-masthead">
+  <div class="arms-affiliation">
+    <span>University of California, Davis</span>
+    <span>Mechanical and Aerospace Engineering</span>
+  </div>
+  <header class="arms-site-header">
+    <a
+      class="arms-brand"
+      href="https://arms.engr.ucdavis.edu/"
+      aria-label="ARMS Laboratory home"
+    >
+      <img
+        src="../assets/arms-logo.svg"
+        alt="ARMS Laboratory"
+        width="1500"
+        height="806"
+      />
+    </a>
+    <button
+      class="arms-menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="arms-main-nav"
+      hidden
+    >
+      Menu <span aria-hidden="true">+</span>
+    </button>
+    <nav id="arms-main-nav" class="arms-main-nav" aria-label="Main navigation">
+      <a href="https://arms.engr.ucdavis.edu/">Home</a>
+      <a href="https://arms.engr.ucdavis.edu/research/">Research</a>
+      <a href="https://arms.engr.ucdavis.edu/members/">People</a>
+      <a href="https://arms.engr.ucdavis.edu/about/">About</a>
+      <a href="https://arms.engr.ucdavis.edu/publications/">Publications</a>
+      <a href="/teaching/" aria-current="location">Teaching</a>
+      <a href="https://arms.engr.ucdavis.edu/visit/">Contact &amp; Visit</a>
+      <a
+        class="arms-nav-join"
+        href="https://arms.engr.ucdavis.edu/open-positions/"
+        >Join ARMS</a
+      >
+    </nav>
+  </header>
+</div>
+<!-- ARMS HEADER END -->
+
+<main class="shell" id="teaching-content" tabindex="-1"><nav class="arms-course-trail" aria-label="Course navigation"><a href="/teaching/">Teaching</a><span aria-hidden="true">/</span><a href="simulators.html">All simulators</a><span aria-hidden="true">/</span><span aria-current="page">Timer Interrupt Lab</span></nav>
+<header><div><div class="eyebrow">EME154 · Interactive Lab</div><h1>A timer event. A change of flow.</h1><p>Follow Timer1 from a compare match to an interrupt, then back to the main program.</p></div><nav class="related-links" aria-label="Related labs"><a href="timer.html">Timer lab</a><a href="timer-calculator.html">Timer calculator</a><a href="index.html">CPU lab</a></nav></header>
+<div class="presets"><button data-demo="lecture">01 · Timer compare example</button><button data-demo="disabled">02 · Why no interrupt?</button><button data-demo="long">03 · When the ISR takes too long</button></div>
+<div class="lab-layout"><aside><h2>Set the experiment</h2><p class="scope">Timer1 · CTC · 16 MHz CPU clock</p><form id="settings"><label>Prescaler<select id="divisor"><option>1</option><option selected>8</option><option>64</option><option>256</option><option>1024</option></select></label><label>OCR1A · counter TOP<input id="top" type="number" min="0" max="65535" value="12499" required></label><label>ISR body duration · CPU cycles<input id="duration" type="number" min="1" max="1600000" value="1600" required></label><button class="primary">Apply & reset</button><p id="error" role="alert"></p><p id="dirty" class="scope" hidden>Settings changed. Apply to start a fresh run.</p></form><p id="timing" class="scope"></p><hr><h2>Interrupt enables</h2><p class="scope">These controls act immediately. Pause to inspect each change.</p><label class="switch"><input id="global" type="checkbox" checked> SREG.I · global enable</label><label class="switch"><input id="mask" type="checkbox" checked> TIMSK1.OCIE1A</label><p class="scope">The I control is locked during ISR handling in this draft. Nested interrupts are outside its scope.</p><details><summary>Predict before stepping</summary><p id="question">If I = 0, will the timer stop or will only interrupt servicing stop?</p><button id="answer">Reveal explanation</button><p id="answer-text" hidden>The timer continues and the compare flag can become set. Both enable bits must be set before the CPU services it.</p></details></aside>
+<section class="lab-main"><div class="toolbar"><div class="buttons"><button id="play" class="primary">▶ Play</button><button id="step">Step phase</button><button id="next">Next interrupt</button><button id="back">Back</button><button id="reset">Reset</button></div><label>Animation <select id="speed"><option value="1200">Slow</option><option value="500" selected>Normal</option><option value="150">Fast</option></select></label></div><p class="scope">Step advances to the next teaching phase. Main-program spans show intermediate counter values and pause at TCNT1 = OCR1A, then at the following timer tick. These observation pauses can occur within an instruction. Animation speed does not change simulated time.</p>
+<section class="duration-comparison" aria-label="Compare timer and ISR durations"><h2>Compare the times</h2><p class="scope">Applied settings · 16 MHz clock · <span id="duration-settings"></span></p><div class="duration-pair"><div><span>Timer compare-event interval</span><strong id="compare-ms"></strong><small id="reach-ms"></small><small id="compare-formula"></small></div><div><span>ISR body duration</span><strong id="body-ms"></strong><small id="body-formula"></small></div></div><p id="duration-verdict"></p><p class="scope">Reaching OCR1A takes OCR1A ticks from zero. The flag is set on the next tick, so compare events are OCR1A + 1 ticks apart. ISR body time excludes interrupt entry, the vector jump, and RETI.</p></section>
+<p id="explanation" class="explanation" role="status"></p>
+<div class="signal"><div id="count-box"><small>TCNT1 · current count</small><strong id="count"></strong><progress id="counter" max="12500"></progress></div><span id="comparison">≠</span><div id="compare-box"><small>OCR1A · compare value</small><strong id="compare"></strong><small>Fixed until Apply & reset</small></div><span>→</span><div id="flag-box"><small>TIFR1.OCF1A</small><strong id="flag"></strong></div><span>+</span><div><small>OCIE1A & I</small><strong id="gate"></strong></div><span>→</span><div><small>CPU phase</small><strong id="cpu"></strong></div></div>
+<section id="long-view" hidden aria-label="Long ISR explanation">
+<h2>Who is using the CPU?</h2><p id="long-summary" class="scope"></p>
+<div class="long-status"><div><small>Main program</small><strong id="main-status"></strong></div><div><small>ISR body</small><strong id="isr-status"></strong><progress id="isr-progress" max="240000" value="0" aria-label="ISR body progress"></progress></div><div><small>Compare interrupt request</small><strong id="pending-status"></strong></div></div>
+<svg id="long-timeline" viewBox="0 0 900 280" role="img" aria-label="Shared timeline showing main program running or paused, ISR activity, and the continuously counting timer"></svg><p class="scope">All three tracks use the same time scale. Amber markers show compare events. A single main instruction is too short to see at this scale; its completion is shown explicitly in the explanation above.</p>
+</section><div class="execution"><section><h2>Main program</h2><div id="main-code" class="listing"></div><p id="main-loops" class="loop-total"></p><p class="scope">The highlighted line is the next instruction. Each counting step summarizes many passes through this loop.</p><p class="scope">Illustrative work blocks, each modeled as a 4-cycle instruction. Addresses are program words.</p></section><section><h2>Interrupt service routine</h2><div id="isr-code" class="listing"></div><p id="work-block-note" class="scope" hidden>The work block summarizes CPU work, not a single instruction. Its internal instruction addresses are not modeled. RETI follows after the configured body duration.</p><p><span id="led" class="led"></span> ISR output · LED <strong id="led-state"></strong></p></section><section><h2>Return address</h2><div class="pc" id="pc"></div><div id="stack" class="stack"></div><p class="scope">Conceptual stack entry holds the saved PC. Hardware stores the return address as bytes.</p></section></div>
+<div class="metrics"><div>Simulated time<strong id="time"></strong></div><div>Compare events<strong id="events"></strong></div><div>ISR entries<strong id="services"></strong></div><div>Events while already pending<strong id="merged"></strong></div></div>
+<h2>Timer and CPU share the same clock</h2><p class="scope">Recent time window. Amber marks compare boundaries; green is main work, blue is ISR handling. Empty regions precede the retained trace.</p><svg id="plot" viewBox="0 0 900 210" role="img" aria-label="Timer counter waveform and CPU activity on a shared time axis"></svg><p id="range" class="scope"></p>
+<details><summary>Arduino setup for the applied settings</summary><p class="scope">Register setup excerpt. ISR timing above is an explicit simulation setting, not a compiler timing estimate. This takes ownership of Timer1.</p><pre id="code"></pre></details><details><summary>Recent execution trace</summary><ol id="trace" class="trace"></ol></details>
+</section></div>
+<details class="notes"><summary>What this draft models</summary><p>Timer1 CTC with OCR1A as TOP, a sticky compare A flag, the interrupt mask and global enable, saving the return PC, interrupt entry, vector jump, ISR work, and RETI. A pending flag is one bit, not an event queue: additional matches while it is already set do not accumulate additional requests.</p><p>The default example uses /8 and OCR1A = 12499: (12499 + 1) × 8 / 16 MHz = 6.25 ms. The interval includes counter value zero. Flag clearing occurs when its interrupt is serviced, not merely because interrupts are enabled.</p><p>This is a guided execution model, not an Arduino compiler or a complete AVR emulator. Main work uses illustrative 4-cycle instructions. Equality pauses preserve partial instruction progress; interrupt acceptance waits for the instruction to finish. Entry is modeled as 4 cycles and the vector JMP as 3 cycles. ISR duration is user-specified and includes any intended compiler save/restore overhead before the separately modeled 4-cycle RETI. Exact SEI timing, live timer-register writes, other interrupt sources, nesting, and SREG/general-register preservation are not simulated. Global-enable changes are teaching controls at phase boundaries.</p><p><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf">ATmega328P hardware reference</a>.</p></details><footer><a href="encoder.html">Encoder & Speed Lab</a> · <a href="speed-calculator.html">Speed error calculator</a> · Inside AVR · Timer Interrupt Lab · Draft · Works offline</footer></main><script src="interrupt-engine.js"></script><script src="interrupt.js"></script></body></html>

@@ -29,6 +29,7 @@ jobs:
       - run: npm run check
       - run: npm run build
       - run: npm run validate
+      - run: npm run test:teaching
       - run: npx playwright install --with-deps chromium
       - run: npm run test:browser
       - uses: actions/upload-pages-artifact@v5

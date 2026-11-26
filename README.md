@@ -33,7 +33,28 @@ The browser suite covers desktop and phone layouts, publication expansion/search
 
 Original photographs, internal notes, local review snapshots, dependency folders, environment files, and generated builds do not belong in the public repository. `dist/` is generated; GitHub Actions builds it from source. This repository is the site project root; do not publish its parent workspace.
 
-## GitHub Pages
+## Teaching
+
+The Teaching landing page is `src/pages/teaching/index.astro` and uses the shared
+site layout. The standalone EME154 labs and calculators live in
+`public/teaching/mechatronics/` and are copied into the published site unchanged.
+Edit each lab's HTML, JavaScript, or CSS directly. Calculation engines generally
+use `*-core.js` or `*-engine.js`; their regression suites are in
+`tests/teaching-models/`. Run `npm run test:teaching` after model changes. This
+command stages the UMD engines and tests in a temporary CommonJS directory.
+
+The standalone teaching header uses `scripts/templates/teaching-header.html`,
+`public/teaching/assets/arms-header.css`, and `arms-header.js`. Run
+`npm run teaching:header` after editing its template. Keep its navigation in sync
+with `src/layouts/Base.astro`. Header styles are scoped to avoid changing lab
+controls or diagrams. The main site and Teaching page share the Astro header.
+
+The browser suite checks every teaching page at desktop and phone sizes, script
+and asset loading, navigation, the mobile menu, and the reference PDF. The ten
+calculation suites run in GitHub Actions before deployment. Generated Arduino
+sketches have structural tests; compilation and hardware validation are separate.
+
+## GitHub Pages deployment
 
 The public repository is `arms-laboratory/arms-laboratory.github.io`, owned by the `arms-laboratory` organization. GitHub Pages uses **GitHub Actions** as its publishing source. The website is served at https://arms.engr.ucdavis.edu.
 

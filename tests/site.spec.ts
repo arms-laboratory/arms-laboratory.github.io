@@ -5,6 +5,7 @@ import { join } from "node:path";
 
 const routes = [
   "/",
+  "/teaching/",
   "/research/",
   "/research/cognitive-manufacturing/",
   "/research/hybrid-manufacturing/",

@@ -1,0 +1,70 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EME154 · Encoder & Speed Lab</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="encoder.css"><link rel="stylesheet" href="course.css?v=arms-2"><link rel="stylesheet" href="../assets/arms-header.css?v=arms-1" data-arms-header>
+<script src="../assets/arms-header.js?v=arms-1" defer data-arms-header></script>
+<meta name="description" content="Interactive EME154 mechatronics teaching models from the ARMS Laboratory at UC Davis.">
+<link rel="canonical" href="https://arms.engr.ucdavis.edu/teaching/mechatronics/encoder.html">
+<link rel="icon" href="/favicon.png" type="image/png">
+</head><body><!-- ARMS HEADER START -->
+<a class="arms-skip-link" href="#teaching-content">Skip to content</a>
+<div class="arms-masthead">
+  <div class="arms-affiliation">
+    <span>University of California, Davis</span>
+    <span>Mechanical and Aerospace Engineering</span>
+  </div>
+  <header class="arms-site-header">
+    <a
+      class="arms-brand"
+      href="https://arms.engr.ucdavis.edu/"
+      aria-label="ARMS Laboratory home"
+    >
+      <img
+        src="../assets/arms-logo.svg"
+        alt="ARMS Laboratory"
+        width="1500"
+        height="806"
+      />
+    </a>
+    <button
+      class="arms-menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="arms-main-nav"
+      hidden
+    >
+      Menu <span aria-hidden="true">+</span>
+    </button>
+    <nav id="arms-main-nav" class="arms-main-nav" aria-label="Main navigation">
+      <a href="https://arms.engr.ucdavis.edu/">Home</a>
+      <a href="https://arms.engr.ucdavis.edu/research/">Research</a>
+      <a href="https://arms.engr.ucdavis.edu/members/">People</a>
+      <a href="https://arms.engr.ucdavis.edu/about/">About</a>
+      <a href="https://arms.engr.ucdavis.edu/publications/">Publications</a>
+      <a href="/teaching/" aria-current="location">Teaching</a>
+      <a href="https://arms.engr.ucdavis.edu/visit/">Contact &amp; Visit</a>
+      <a
+        class="arms-nav-join"
+        href="https://arms.engr.ucdavis.edu/open-positions/"
+        >Join ARMS</a
+      >
+    </nav>
+  </header>
+</div>
+<!-- ARMS HEADER END -->
+
+<main class="shell" id="teaching-content" tabindex="-1"><nav class="arms-course-trail" aria-label="Course navigation"><a href="/teaching/">Teaching</a><span aria-hidden="true">/</span><a href="simulators.html">All simulators</a><span aria-hidden="true">/</span><span aria-current="page">Encoder &amp; Speed Lab</span></nav>
+<header><div><div class="eyebrow">EME154 · Interactive Lab</div><h1>Motion, counts, and measured speed.</h1><p>Follow the shaft through quadrature decoding, position sampling, and speed measurement.</p></div><nav class="related-links" aria-label="Related labs"><a href="sampling.html">Sampling lab</a><a href="speed-calculator.html">Speed calculator</a><a href="index.html">CPU lab</a></nav></header>
+<section class="lesson-box"><label for="demo">Choose an experiment </label><select id="demo"><option value="0">01 · Rotation → pulses → position</option><option value="1">02 · Counter rollover and sampling</option><option value="2">03 · The 80 ms sampling boundary</option><option value="3">04 · Two ways to measure speed</option><option value="4">Experiment with your own settings</option></select><h2 id="lesson-title"></h2><p id="lesson-text"></p></section>
+<div class="encoder-layout"><form id="settings" class="controls"><h2>Measurement settings</h2><label>Encoder cycles / revolution<input id="slits" type="number" min="1" max="65536" step="1" value="256" required></label>
+<label>Decoding<select id="decode"><option value="1">×1 · A rising</option><option value="2">×2 · A edges</option><option value="4" selected>×4 · all A/B edges</option></select></label>
+<label>Sampling window (ms)<input id="ts" type="number" min="0.01" max="10000" step="any" value="10" required></label>
+<label>U/D counter size<select id="bits"><option value="4">4 bit · teaching example</option><option value="8">8 bit</option><option value="16" selected>16 bit</option></select></label>
+<label>Timer source clock (MHz)<input id="clock" type="number" min="0.001" max="100" step="any" value="16" required></label>
+<label>Timer prescaler<select id="divisor"><option>1</option><option selected>8</option><option>64</option><option>256</option><option>1024</option></select></label>
+<label>Duration timer width<select id="timerBits"><option value="8">8 bit</option><option value="16" selected>16 bit</option></select></label><button class="primary">Apply & reset</button><p id="dirty" class="scope" hidden>Settings changed. Apply to restart with these values.</p><p id="error" class="error" role="alert"></p><p class="scope">The U/D counter holds position counts. The timer prescaler divides the clock used to measure time between edges.</p></form>
+<section class="panel"><div class="toolbar"><div class="buttons"><button id="play" class="primary">▶ Play</button><button id="edge">Next event</button><button id="sample">Next sample</button><button id="back">Back</button><button id="reset">Reset</button></div><label>Playback <select id="pace"><option value="edge">Inspect edges</option><option value="sample">Inspect samples</option></select></label></div>
+<div class="wide-control"><label>Actual speed <input id="rpm" type="number" min="-10000" max="10000" step="any" value="30"> RPM</label><button id="reverse">Reverse</button><button id="stop">Stop shaft</button></div><p class="scope">Playback is slowed for observation. Next event advances to an A/B edge or sampling boundary, whichever comes first. Home is a single index pulse per revolution, one A/B state wide. Each step uses physical simulated time. Drag the disc to move the shaft at the selected speed magnitude; use the speed field for keyboard control.</p>
+<div class="instrument-row"><div><svg id="disc" class="disc" viewBox="0 0 240 240" role="img" aria-label="Rotating encoder disc; drag to move shaft"></svg><p id="disc-note" class="scope"></p></div><div><h2>A/B and Home signals at the cursor</h2><svg id="waves" class="plot" viewBox="0 0 650 220" role="img" aria-label="Channel A, B, and Home signals over simulated time"></svg><p id="phase" class="readout"></p></div></div>
+<div id="stats" class="stats"></div><div id="sampling" class="notice"></div>
+<div class="demo-question"><strong>Predict before stepping</strong><p id="question"></p><button id="reveal">Reveal explanation</button><p id="answer" hidden></p></div>
+<h2>Two measurements of the same motion</h2><div id="speed-stats" class="stats"></div><p id="speed-note" class="readout"></p><a id="calculator-link" class="calc-link" href="speed-calculator.html">Explore the predicted error curves for these settings →</a>
+<h2>Position samples</h2><p class="scope">Raw counts wrap. Software adds the shortest signed difference between samples. “Actual Δ” is visible only because this is a simulation.</p><svg id="position" class="plot" viewBox="0 0 850 180" role="img" aria-label="Actual and reconstructed position over samples"></svg><div class="legend"><span class="green">— Actual accumulated counts</span><span class="blue">- - Software position</span></div><div class="table-scroll"><table><thead><tr><th>Time (ms)</th><th>Raw count</th><th>Actual Δ</th><th>Inferred Δ</th><th>Software position</th></tr></thead><tbody id="samples"></tbody></table></div>
+</section></div><details><summary>Model assumptions</summary><p>Ideal incremental encoder, uniform motion within each step, perfect edges, no missed interrupts, and no mechanical noise. Clockwise-positive is a chosen convention: 00 → 10 → 11 → 01. ×1 counts one edge per cycle, ×2 counts two, and ×4 counts all four. Home marks one physical shaft position once per revolution and is one A/B state wide. It does not by itself reset the position counter or make the encoder absolute. Counter zero is an assumed known starting position; this draft does not model a homing routine.</p><p>Pulse counting uses sampled modular position differences. Pulse duration uses quantized timestamps of decoded edges, with an ideal extended timer internally; the display flags intervals requiring overflow handling for the selected timer width. Reversal can make a single duration interval unrepresentative. Hardware latency, ISR costs, oscillator tolerance, and overflow-service code are outside this draft.</p></details><footer><a href="sampling.html">Position Counter & Sampling Lab</a> · Inside AVR · Encoder & Speed Lab</footer></main><script src="encoder-core.js"></script><script src="encoder.js"></script></body></html>

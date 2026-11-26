@@ -1,0 +1,64 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EME154 · Speed Measurement Error Calculator</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="encoder.css"><link rel="stylesheet" href="course.css?v=arms-2"><link rel="stylesheet" href="../assets/arms-header.css?v=arms-1" data-arms-header>
+<script src="../assets/arms-header.js?v=arms-1" defer data-arms-header></script>
+<meta name="description" content="Interactive EME154 mechatronics teaching models from the ARMS Laboratory at UC Davis.">
+<link rel="canonical" href="https://arms.engr.ucdavis.edu/teaching/mechatronics/speed-calculator.html">
+<link rel="icon" href="/favicon.png" type="image/png">
+</head><body><!-- ARMS HEADER START -->
+<a class="arms-skip-link" href="#teaching-content">Skip to content</a>
+<div class="arms-masthead">
+  <div class="arms-affiliation">
+    <span>University of California, Davis</span>
+    <span>Mechanical and Aerospace Engineering</span>
+  </div>
+  <header class="arms-site-header">
+    <a
+      class="arms-brand"
+      href="https://arms.engr.ucdavis.edu/"
+      aria-label="ARMS Laboratory home"
+    >
+      <img
+        src="../assets/arms-logo.svg"
+        alt="ARMS Laboratory"
+        width="1500"
+        height="806"
+      />
+    </a>
+    <button
+      class="arms-menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="arms-main-nav"
+      hidden
+    >
+      Menu <span aria-hidden="true">+</span>
+    </button>
+    <nav id="arms-main-nav" class="arms-main-nav" aria-label="Main navigation">
+      <a href="https://arms.engr.ucdavis.edu/">Home</a>
+      <a href="https://arms.engr.ucdavis.edu/research/">Research</a>
+      <a href="https://arms.engr.ucdavis.edu/members/">People</a>
+      <a href="https://arms.engr.ucdavis.edu/about/">About</a>
+      <a href="https://arms.engr.ucdavis.edu/publications/">Publications</a>
+      <a href="/teaching/" aria-current="location">Teaching</a>
+      <a href="https://arms.engr.ucdavis.edu/visit/">Contact &amp; Visit</a>
+      <a
+        class="arms-nav-join"
+        href="https://arms.engr.ucdavis.edu/open-positions/"
+        >Join ARMS</a
+      >
+    </nav>
+  </header>
+</div>
+<!-- ARMS HEADER END -->
+
+<main class="shell" id="teaching-content" tabindex="-1"><nav class="arms-course-trail" aria-label="Course navigation"><a href="/teaching/">Teaching</a><span aria-hidden="true">/</span><a href="simulators.html">All simulators</a><span aria-hidden="true">/</span><span aria-current="page">Speed Measurement Error Calculator</span></nav>
+<header><div><div class="eyebrow">EME154 · Calculator</div><h1>Where should the methods cross?</h1><p>Change the measurement conditions. Compare quantization error and inspect every calculation.</p></div><nav class="related-links" aria-label="Related labs"><a href="encoder.html">Encoder lab</a><a href="sampling.html">Sampling lab</a></nav></header>
+<div class="encoder-layout"><form id="settings" class="controls"><h2>Given conditions</h2><label>Encoder cycles / revolution<input id="slits" type="number" min="1" max="65536" step="1" value="256" required></label>
+<label>Decoding<select id="decode"><option value="1">×1 · A rising</option><option value="2">×2 · A edges</option><option value="4" selected>×4 · all A/B edges</option></select></label>
+<label>Sampling window (ms)<input id="ts" type="number" min="0.01" max="10000" step="any" value="10" required></label>
+<label>U/D counter size<select id="bits"><option value="4">4 bit · teaching example</option><option value="8">8 bit</option><option value="16" selected>16 bit</option></select></label>
+<label>Timer source clock (MHz)<input id="clock" type="number" min="0.001" max="100" step="any" value="16" required></label>
+<label>Timer prescaler<select id="divisor"><option>1</option><option selected>8</option><option>64</option><option>256</option><option>1024</option></select></label>
+<label>Duration timer width<select id="timerBits"><option value="8">8 bit</option><option value="16" selected>16 bit</option></select></label><label>Plot minimum (RPM)<input id="minRPM" type="number" min="0.001" max="100000" step="any" value="1" required></label><label>Plot maximum (RPM)<input id="maxRPM" type="number" min="0.002" max="1000000" step="any" value="3000" required></label><label>Target relative error (%)<input id="target" type="number" min="0.001" max="100" step="any" value="1" required></label><button id="lecture" type="button">2048-cycle example</button><button id="example" type="button">73.24 RPM crossover example</button><p id="error" class="error" role="alert"></p></form>
+<section class="panel"><div id="summary" class="stats"></div><div class="chart-title"><h2>Predicted quantization error</h2><label>Vertical axis <select id="units"><option value="relative">Relative error (%)</option><option value="absolute">Absolute error (RPM)</option></select></label></div><div class="legend"><span class="green">— Pulse counting</span><span class="blue">— Pulse duration</span><span>Shading: both meet target · dotted: target · dashed: saved curves</span></div><svg id="chart" class="plot" viewBox="0 0 900 410" role="img" aria-label="Logarithmic speed versus quantization error; drag to select speed"></svg><div class="wide-control"><label>Inspect <input id="speed" type="number" min="0.001" max="1000000" value="100" step="any"> RPM</label><input id="slider" type="range" min="0" max="1000" value="500" aria-label="Selected speed on logarithmic plot"><button id="cross">Inspect crossover</button><button id="save">Keep current curves</button><button id="clear" disabled>Clear comparison</button></div><p id="comparison" class="scope"></p><div id="verdict" class="notice"></div><p id="target-note" class="readout"></p>
+<div class="calc-equations"><section><h2>Pulse counting</h2><div id="count-math" class="math"></div></section><section><h2>Pulse duration</h2><div id="duration-math" class="math"></div></section></div><h2>Calculate the crossover</h2><div id="cross-math" class="math"></div><div id="limits" class="notice warn"></div><a id="lab-link" class="calc-link" href="encoder.html">Try these settings in the Encoder & Speed Lab →</a>
+<details open><summary>What these curves mean</summary><p>The curves use approximate one-count and one-timer-tick uncertainty: εcount ≈ 1/q and εduration ≈ 1/i. They are quantization guides, not actual errors for every measurement, statistical confidence intervals, or total accuracy guarantees. Both methods use the same decoded edge spacing. The graph uses logarithmic axes.</p><p>Absolute counting uncertainty is 60/(p Ts) RPM. Duration uncertainty is approximately p n²/(60 fd) RPM; the approximation becomes poor when few timer ticks separate edges. At zero speed relative error is undefined and no new period measurement arrives. Timer overflow, counter aliasing, and update delay are separate limits. A crossing outside valid operating limits is a mathematical crossover, not a usable switching speed.</p></details></section></div><footer><a href="sampling.html">Position Counter & Sampling Lab</a> · Inside AVR · Speed Measurement Error Calculator</footer></main><script src="encoder-core.js"></script><script src="encoder.js"></script></body></html>

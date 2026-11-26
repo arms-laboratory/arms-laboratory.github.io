@@ -1,0 +1,171 @@
+/* Shared ARMS frame. Scope rules so simulator diagrams and controls keep their styles. */
+.arms-masthead {
+  --arms-ink: #172c43;
+  --arms-paper: #f8f8f4;
+  --arms-line: #ccd3d8;
+  --arms-accent: #bc3b20;
+  --arms-gutter: max(28px, calc((100vw - 1280px) / 2));
+  color: var(--arms-ink);
+  font: 17px/1.65 "Segoe UI", Arial, sans-serif;
+}
+.arms-masthead *, .arms-skip-link, .arms-course-trail {
+  box-sizing: border-box;
+}
+.arms-affiliation {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 9px var(--arms-gutter);
+  background: var(--arms-ink);
+  color: #e7ebef;
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.arms-site-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 30px;
+  margin: 0;
+  padding: 18px var(--arms-gutter);
+  background: var(--arms-paper);
+  border-bottom: 1px solid var(--arms-line);
+}
+.arms-site-header .arms-brand {
+  display: block;
+  flex: none;
+  width: 116px;
+  padding: 0;
+  border: 0;
+}
+.arms-brand img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+.arms-site-header .arms-main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.arms-main-nav a {
+  display: inline-block;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #244c77;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.65;
+  text-decoration: none;
+  text-underline-offset: .18em;
+  white-space: nowrap;
+}
+.arms-main-nav a:hover { text-decoration: underline; }
+.arms-main-nav a[aria-current] {
+  color: var(--arms-ink);
+  border-bottom-color: var(--arms-accent);
+}
+.arms-main-nav .arms-nav-join {
+  margin-left: 8px;
+  padding: 10px 16px;
+  border: 1px solid #9faeb9;
+}
+.arms-site-header .arms-menu-toggle { display: none; }
+.arms-masthead [hidden] { display: none !important; }
+.arms-masthead a:focus-visible,
+.arms-masthead button:focus-visible,
+.arms-course-trail a:focus-visible,
+.arms-skip-link:focus-visible {
+  outline: 3px solid #bc3b20;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px #fff;
+}
+.arms-skip-link {
+  position: absolute;
+  top: -120px;
+  left: 12px;
+  z-index: 100;
+  padding: 8px 12px;
+  background: #fff;
+  color: #172c43;
+  font: 16px/1.5 "Segoe UI", Arial, sans-serif;
+}
+.arms-skip-link:focus { top: 10px; }
+.arms-course-trail {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin: 0 0 24px;
+  padding: 0 0 16px;
+  border-bottom: 1px solid #ccd3d8;
+  color: #526477;
+  font: 14px/1.5 "Segoe UI", Arial, sans-serif;
+}
+.arms-course-trail a { color: #244c77; text-underline-offset: .18em; }
+.arms-course-trail [aria-current] { color: #172c43; font-weight: 600; }
+@media (max-width: 1100px) {
+  .arms-site-header {
+    flex-wrap: wrap;
+    gap: 0;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .arms-site-header .arms-brand { width: 100px; }
+  .arms-site-header .arms-menu-toggle {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-left: auto;
+    padding: 10px 0 10px 16px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--arms-ink);
+    font: 16px/1.5 "Segoe UI", Arial, sans-serif;
+    cursor: pointer;
+  }
+  .arms-menu-toggle span { font-size: 24px; line-height: 1; }
+  .arms-site-header .arms-menu-toggle:hover { background: transparent; }
+  .arms-site-header .arms-main-nav {
+    flex-basis: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    justify-content: start;
+    gap: 0 24px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--arms-line);
+  }
+  .arms-site-header[data-menu-open="false"] .arms-main-nav { display: none; }
+  .arms-main-nav a {
+    min-height: 44px;
+    padding: 10px 0;
+    white-space: normal;
+  }
+  .arms-main-nav .arms-nav-join { margin: 0; padding: 10px 0; border: 0; }
+  .arms-main-nav a[aria-current] {
+    border-bottom-color: transparent;
+    text-decoration: underline;
+    text-decoration-color: var(--arms-accent);
+    text-decoration-thickness: 2px;
+  }
+}
+@media (max-width: 900px) {
+  .arms-affiliation span:last-child { display: none; }
+}
+@media (max-width: 480px) {
+  .arms-masthead { --arms-gutter: 20px; }
+}

@@ -1,0 +1,83 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EME154 · Position Control Lab</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="position.css"><link rel="stylesheet" href="course.css?v=arms-2"><link rel="stylesheet" href="../assets/arms-header.css?v=arms-1" data-arms-header>
+<script src="../assets/arms-header.js?v=arms-1" defer data-arms-header></script>
+<meta name="description" content="Interactive EME154 mechatronics teaching models from the ARMS Laboratory at UC Davis.">
+<link rel="canonical" href="https://arms.engr.ucdavis.edu/teaching/mechatronics/position.html">
+<link rel="icon" href="/favicon.png" type="image/png">
+</head><body><!-- ARMS HEADER START -->
+<a class="arms-skip-link" href="#teaching-content">Skip to content</a>
+<div class="arms-masthead">
+  <div class="arms-affiliation">
+    <span>University of California, Davis</span>
+    <span>Mechanical and Aerospace Engineering</span>
+  </div>
+  <header class="arms-site-header">
+    <a
+      class="arms-brand"
+      href="https://arms.engr.ucdavis.edu/"
+      aria-label="ARMS Laboratory home"
+    >
+      <img
+        src="../assets/arms-logo.svg"
+        alt="ARMS Laboratory"
+        width="1500"
+        height="806"
+      />
+    </a>
+    <button
+      class="arms-menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="arms-main-nav"
+      hidden
+    >
+      Menu <span aria-hidden="true">+</span>
+    </button>
+    <nav id="arms-main-nav" class="arms-main-nav" aria-label="Main navigation">
+      <a href="https://arms.engr.ucdavis.edu/">Home</a>
+      <a href="https://arms.engr.ucdavis.edu/research/">Research</a>
+      <a href="https://arms.engr.ucdavis.edu/members/">People</a>
+      <a href="https://arms.engr.ucdavis.edu/about/">About</a>
+      <a href="https://arms.engr.ucdavis.edu/publications/">Publications</a>
+      <a href="/teaching/" aria-current="location">Teaching</a>
+      <a href="https://arms.engr.ucdavis.edu/visit/">Contact &amp; Visit</a>
+      <a
+        class="arms-nav-join"
+        href="https://arms.engr.ucdavis.edu/open-positions/"
+        >Join ARMS</a
+      >
+    </nav>
+  </header>
+</div>
+<!-- ARMS HEADER END -->
+
+<main class="shell" id="teaching-content" tabindex="-1"><nav class="arms-course-trail" aria-label="Course navigation"><a href="/teaching/">Teaching</a><span aria-hidden="true">/</span><a href="simulators.html">All simulators</a><span aria-hidden="true">/</span><span aria-current="page">Position Control Lab</span></nav>
+<header><div><div class="eyebrow">EME154 · Interactive Lab</div><h1>Follow the command. Finish the move.</h1><p>A sampled position controller sends velocity commands to an inner drive.</p></div><nav class="related-links" aria-label="Related labs"><a href="frequency.html">Frequency response</a><a href="motor.html">Motor & Drive</a></nav></header>
+<nav class="pages" aria-label="Demonstrations"><button data-page="0" aria-pressed="true">01 · Following error</button><button data-page="1" aria-pressed="false">02 · P / PI / PID</button><button data-page="2" aria-pressed="false">03 · In position</button><button data-page="3" aria-pressed="false">04 · Timer interrupt</button></nav>
+<section class="intro"><h2 id="heading"></h2><p id="description"></p></section>
+<div class="layout"><aside><form id="settings"><h2>Experiment settings</h2>
+<label>Controller<select id="mode"><option>P</option><option>PI</option><option>PID</option></select></label>
+<label>Travel (mm)<input id="distance" type="number" min="1" max="100" step="any" value="40" required></label>
+<label>Reference speed (mm/s)<input id="speed" type="number" min="1" max="50" step="any" value="10" required></label>
+<label>Kp (s⁻¹)<input id="kp" type="number" min="0" max="100" step="any" value="5" required></label>
+<label>Ki (s⁻²)<input id="ki" type="number" min="0" max="100" step="any" value="8" required></label>
+<label>Kd (dimensionless)<input id="kd" type="number" min="0" max="2" step="any" value="0.15" required></label>
+<label>Sampling interval Δt (s)<input id="dt" type="number" min="0.001" max="0.5" step="any" value="0.02" required></label>
+<label>Inner drive lag τ (s)<input id="tau" type="number" min="0" max="1" step="any" value="0" required></label>
+<label>Velocity limit (mm/s)<input id="limit" type="number" min="1" max="200" step="any" value="60" required></label>
+<label>In-position tolerance (mm)<input id="tolerance" type="number" min="0.001" max="5" step="any" value="0.1" required></label>
+<label class="check"><input id="feedforward" type="checkbox"> Reference-velocity feedforward</label>
+<label class="check"><input id="switching" type="checkbox"> In-position switching</label>
+<label>When in position<select id="policy"><option value="zero">Zero output + reset integral</option><option value="kp">Set Kp = 0 only</option></select></label>
+<button class="primary" type="submit">Apply & rewind</button><p id="settings-status" role="status">Settings apply together.</p></form></aside>
+<section class="main"><div class="buttons presets"><button data-preset="baseline">P baseline</button><button data-preset="speed">Double speed</button><button data-preset="gain">Double Kp</button><button data-preset="compensate">Compensated P</button><button data-preset="lag">PI/PID with drive lag</button><button data-preset="stop">Endpoint switching</button></div>
+<div class="toolbar"><div class="buttons"><button id="play" class="primary">Play</button><button id="rewind">Rewind</button><button id="sample">Next interrupt</button><button id="phase">Next ISR calculation</button></div><label>Playback<select id="rate"><option value="0.25">¼×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div>
+<p id="status" role="status" aria-live="polite">Paused.</p><svg id="motion" role="img" aria-label="Reference and actual axis position"></svg>
+<label class="scrub">Time cursor <output id="time"></output><input id="cursor" type="range" min="0" max="450" value="0" step="1"></label>
+<div id="readout" class="readout"></div><p id="prediction" class="teaching"></p>
+<div id="legend" class="legend"></div><h2 id="plot-title">Position versus time</h2><svg id="position" class="plot" role="img" aria-label="Commanded and actual position versus time"></svg>
+<h2 id="second-title">Following error</h2><svg id="secondary" class="plot" role="img" aria-label="Error or velocity contributions versus time"></svg>
+<section id="terms"><h2>Build the velocity command</h2><div id="equation" class="equation"></div><p>P = Kp e · I = Ki Σ(e Δt) · D = Kd (eᵢ − eᵢ₋₁)/Δt. Each contribution has units of mm/s.</p></section>
+<section id="endpoint" hidden><h2>Endpoint decision</h2><p id="decision"></p><p>The switching event latches for this move. “Set Kp = 0 only” leaves I and D active. “Zero output + reset integral” overrides the full command. Neither policy re-enables position holding after a disturbance.</p></section>
+<section id="isr" hidden><h2>One interrupt, six calculations</h2><p>Step through a completed sample to inspect its calculations. The physical interval advances only when you move to the next interrupt. Highlighting is instructional, not CPU execution timing.</p><div class="buttons"><button id="isr-sample">Next interrupt</button><button id="isr-phase" class="primary">Next calculation</button></div><ol id="steps"></ol><div class="table-scroll"><table><thead><tr><th>Sample</th><th>t (s)</th><th>Xr (mm)</th><th>Xc (mm)</th><th>e (mm)</th><th>VELX (mm/s)</th></tr></thead><tbody id="history"></tbody></table></div></section>
+<details><summary>Model assumptions</summary><p>Xr is a constant-speed ramp capped at the endpoint. The controller computes e = Xr − Xc and outputs velocity, not force. With ideal velocity tracking and stable, unsaturated P control, constant-speed following error approaches speed/Kp. When the reference stops, P error decays toward zero.</p><p>Switch only after XGO = 0 and |e| &lt; INPX. The gain-only option uses Kp_inpsn = 0. A finite drive lag can cause coasting after switching and movement outside tolerance. “In position” records the latched event, not a guarantee of remaining in the band.</p><p>This draft uses explicit current-reference indexing. The equivalent error update is eᵢ = eᵢ₋₁ + ΔXrᵢ − ΔXcᵢ. The next reference increment can equivalently be prepared at the end of the previous interrupt.</p><p>Between interrupts the command is held constant. The inner drive follows τ dv/dt + v = VELX, with exact interval propagation; τ = 0 gives ideal velocity tracking. Sampling is uniform. The encoder is ideal, with no quantization, counter wrap, noise, or delay. There is no simulated CPU execution time or jitter.</p><p>The derivative acts on error and is unfiltered. Integration uses the current error and conditional anti-windup at the velocity limit. Saturation, derivative transients, large gains, and long sample intervals can change behavior. These illustrative values are not tuned equipment settings. Runs include five seconds after the reference reaches its endpoint; settling is not guaranteed in that window.</p></details>
+</section></div><footer>Offline teaching model</footer></main><script src="position-core.js"></script><script src="position.js?v=playback-2"></script></body></html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EME154 · AVR Architecture Explorer</title><link rel="stylesheet" href="architecture.css"><link rel="stylesheet" href="course.css?v=arms-2"><link rel="stylesheet" href="../assets/arms-header.css?v=arms-1" data-arms-header>
+<script src="../assets/arms-header.js?v=arms-1" defer data-arms-header></script>
+<meta name="description" content="Interactive EME154 mechatronics teaching models from the ARMS Laboratory at UC Davis.">
+<link rel="canonical" href="https://arms.engr.ucdavis.edu/teaching/mechatronics/architecture.html">
+<link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body><!-- ARMS HEADER START -->
+<a class="arms-skip-link" href="#teaching-content">Skip to content</a>
+<div class="arms-masthead">
+  <div class="arms-affiliation">
+    <span>University of California, Davis</span>
+    <span>Mechanical and Aerospace Engineering</span>
+  </div>
+  <header class="arms-site-header">
+    <a
+      class="arms-brand"
+      href="https://arms.engr.ucdavis.edu/"
+      aria-label="ARMS Laboratory home"
+    >
+      <img
+        src="../assets/arms-logo.svg"
+        alt="ARMS Laboratory"
+        width="1500"
+        height="806"
+      />
+    </a>
+    <button
+      class="arms-menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="arms-main-nav"
+      hidden
+    >
+      Menu <span aria-hidden="true">+</span>
+    </button>
+    <nav id="arms-main-nav" class="arms-main-nav" aria-label="Main navigation">
+      <a href="https://arms.engr.ucdavis.edu/">Home</a>
+      <a href="https://arms.engr.ucdavis.edu/research/">Research</a>
+      <a href="https://arms.engr.ucdavis.edu/members/">People</a>
+      <a href="https://arms.engr.ucdavis.edu/about/">About</a>
+      <a href="https://arms.engr.ucdavis.edu/publications/">Publications</a>
+      <a href="/teaching/" aria-current="location">Teaching</a>
+      <a href="https://arms.engr.ucdavis.edu/visit/">Contact &amp; Visit</a>
+      <a
+        class="arms-nav-join"
+        href="https://arms.engr.ucdavis.edu/open-positions/"
+        >Join ARMS</a
+      >
+    </nav>
+  </header>
+</div>
+<!-- ARMS HEADER END -->
+
+<main class="architecture-shell" id="teaching-content" tabindex="-1"><nav class="arms-course-trail" aria-label="Course navigation"><a href="/teaching/">Teaching</a><span aria-hidden="true">/</span><a href="simulators.html">All simulators</a><span aria-hidden="true">/</span><span aria-current="page">AVR Architecture Explorer</span></nav>
+<header><div><div class="eyebrow">EME154 · Interactive Lab</div><h1>Inside the AVR</h1><p>Explore the hardware. Follow the connections.</p></div><div class="header-right"><a href="index.html">Code execution ↗</a><span class="chip">ATmega328P · 8-bit</span></div></header>
+<nav class="tabs" aria-label="Explorations"><button data-tab="bus" aria-pressed="true">01 <span>Buses</span></button><button data-tab="memory" aria-pressed="false">02 <span>Memory architecture</span></button><button data-tab="alu" aria-pressed="false">03 <span>GPRs, ALU & flags</span></button><button data-tab="special" aria-pressed="false">04 <span>SFRs, PC & stack</span></button></nav>
+<div class="context"><p id="context"></p><label>Display values <select id="format"><option value="hex">Hexadecimal</option><option value="dec">Decimal</option><option value="bin">Binary</option></select></label><button id="reset">Reset explorer</button></div>
+<section class="overview" aria-label="Connected components"><div class="overview-label">HARDWARE MAP <small>Select a component</small></div><div class="components"><button data-go="memory">Flash <small>Program words</small></button><span class="connector">↔</span><button data-go="special" data-sub="pc">PC <small id="map-pc"></small></button><button data-go="alu">GPRs + ALU <small>32 × 8 bits</small></button><button data-go="alu">SREG <small id="map-sreg"></small></button><span class="connector">↔</span><button data-go="memory">SRAM / EEPROM <small>Data bytes</small></button><button data-go="special" data-sub="sfr">SFRs <small>Assigned functions</small></button><button data-go="special" data-sub="stack">SP <small id="map-sp"></small></button></div></section>
+<div class="lab"><aside id="controls"></aside><section class="stage" id="stage" aria-label="Experiment visualization"></section></div>
+<p id="status" role="status" aria-live="polite"></p>
+<section class="challenge"><div><div class="eyebrow">PREDICT, THEN TRY</div><h2 id="challenge-title"></h2><p id="challenge-question"></p></div><div><button id="challenge-setup">Set up challenge</button><details id="challenge-answer"><summary>Reveal explanation</summary><p id="challenge-explanation"></p></details></div></section>
+<details class="notes"><summary>About this model & hardware references</summary><p>This is a component explorer, not an instruction emulator. Bus phases are explanatory pauses, not clock cycles. The architectural comparison illustrates access paths, not a universal performance ratio. AVR has separate program and data pathways; these drawings group signals by purpose rather than reproduce the chip’s wiring.</p><p>Startup and Reset explorer initialize GPRs and SRAM to zero for repeatable experiments. Power cycling marks them unknown. EEPROM starts at 0xFF and persists across simulated power cycles. Reset explorer starts a new experiment, including EEPROM. No state is saved after closing or reloading the page.</p><p>Port B is an ideal GPIO model with alternate functions disabled, pull-ups enabled when requested, and no input synchronization delay. PB6/PB7 are included as generic GPIO for this exercise; an Arduino UNO normally uses them for its oscillator. Timer ticking, interrupts, EEPROM programming timing, Flash self-programming, and electrical drive strength are outside this model.</p><p>The SRAM ends at 0x08FF. A PUSH writes at SP then decrements SP; POP increments SP then reads. Flash addresses are 16-bit word addresses; the PC is 14 bits.</p><p>References: <a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf" target="_blank" rel="noopener">Microchip ATmega328P datasheet</a> · <a href="manual.pdf" target="_blank" rel="noopener">AVR instruction set manual</a></p></details>
+<footer>Offline architecture explorer <span>State is shared across all four explorations.</span></footer>
+</main><script src="architecture-core.js"></script><script src="architecture.js"></script></body></html>
